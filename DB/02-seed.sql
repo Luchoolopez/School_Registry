@@ -1,8 +1,8 @@
 USE docente_app;
 
-INSERT INTO users (username, password, role) 
+INSERT INTO users (username, dni, password, role) 
 VALUES 
-('admin', '$2a$10$EpW.S.w.w.w.w.w.w.w.w.O.w.w.w.w.w.w.w.w.w.w.w.w.w.w.e', 'admin');
+('admin', '00000000', '$2b$10$3j4o7yJv0.qcgtdyYUwgmeRmgt.upVth.ut73Wwmrximj.rhbelAK', 'admin');
 
 
 -- Insertar una Escuela de prueba para el admin (ID usuario 1)
