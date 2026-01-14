@@ -16,7 +16,7 @@ services:
       - mysql_data:/var/lib/mysql 
       - ./DB/sql:/docker-entrypoint-initdb.d
     networks:
-      - motolog-network
+      - docente-network
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
       timeout: 20s
@@ -48,7 +48,7 @@ services:
       db:
         condition: service_healthy
     networks:
-      - motolog-network
+      - docente-network
 
   frontend:
     build: ./frontend
@@ -68,11 +68,11 @@ services:
     depends_on:
       - backend
     networks:
-      - motolog-network
+      - docente-network
 
 volumes:
   mysql_data:
 
 networks:
-  motolog-network:
+  docente-network:
     driver: bridge

@@ -1,6 +1,4 @@
-CREATE DATABASE IF NOT EXISTS docente_app;
-
-USE docente_app;
+USE docente_db;
 
 -- 1. Usuarios (Solo admins o docentes creados por el admin)
 CREATE TABLE IF NOT EXISTS users (
@@ -9,7 +7,7 @@ CREATE TABLE IF NOT EXISTS users (
     dni VARCHAR(20) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL, -- Guardará el hash de bcrypt
     role ENUM('admin', 'docente') DEFAULT 'docente',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP.
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
 );
 

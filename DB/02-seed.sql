@@ -1,4 +1,4 @@
-USE docente_app;
+USE docente_db;
 
 INSERT INTO users (username, dni, password, role) 
 VALUES 
