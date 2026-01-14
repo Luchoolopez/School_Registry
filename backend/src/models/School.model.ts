@@ -5,9 +5,10 @@ interface SchoolAttributes {
     id: number;
     user_id:number;
     name: string;
-    academic_year: string;
+    academic_year: number;
     createdAt?: Date;
     updatedAt?: Date;
+    deleteAt?: Date;
 }
 
 export type SchoolCreationAttributes = Optional<SchoolAttributes, 'id' | 'createdAt' | 'updatedAt'>;
@@ -17,7 +18,7 @@ export class School extends Model<SchoolAttributes, SchoolCreationAttributes>
     public id!: number;
     public user_id!:number;
     public name!: string;
-    public academic_year!: string;
+    public academic_year!: number;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 }
@@ -46,6 +47,7 @@ School.init(
         sequelize,
         tableName:'schools',
         timestamps:true,
+        paranoid:true, //activa el soft delete automatico 
         underscored:true,
     }
 );
