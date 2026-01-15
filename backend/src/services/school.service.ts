@@ -21,6 +21,17 @@ export class SchoolService {
         })
     }
 
+    async getSchoolById(schoolId: number, userId: number) {
+        const school = await School.findOne({
+            where: { id: schoolId, user_id: userId }
+        });
+        
+        if (!school) {
+            throw new Error("Escuela no encontrada o no tienes acceso");
+        }
+        return school;
+    }
+
     async getUsersSchools(userId: number) {
         return await School.findAll({
             where: { user_id: userId },
