@@ -1,7 +1,16 @@
 import axios from 'axios';
 
+const resolveBaseUrl = () => {
+    const env = import.meta.env.VITE_API_URL as string | undefined;
+    const defaultBase = 'http://localhost:3000';
+    const raw = env && env.length ? env : defaultBase;
+    const normalized = raw.replace(/\/+$/, '');
+    if (normalized.endsWith('/api')) return normalized;
+    return `${normalized}/api`;
+};
+
 const apiClient = axios.create({
-    baseURL:  import.meta.env.VITE_API_URL||'http://localhost:3000/api', 
+    baseURL: resolveBaseUrl(),
     headers: {
         'Content-Type': 'application/json'
     }

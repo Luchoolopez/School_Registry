@@ -1,7 +1,30 @@
-module.exports = {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+//module.exports = {
+// content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+// theme: {
+//  extend: {},
+//},
+//plugins: [],
+//}
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "primary": "#2b7cee",
+        "background-light": "#f6f7f8",
+        "background-dark": "#101822",
+      },
+      fontFamily: {
+        "display": ["Lexend", "sans-serif"], // La fuente del diseño
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'), // Necesitas instalar esto: npm i -D @tailwindcss/forms
+  ],
 }
