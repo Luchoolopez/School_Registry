@@ -97,7 +97,7 @@ export class StudentController {
     getStudentById = async (req: Request, res: Response) => {
         try {
             const userId = req.user?.id;
-            const { schoolId } = req.params;
+            const { id } = req.params;
 
             if (!userId) {
                 return res.status(401).json({
@@ -106,14 +106,14 @@ export class StudentController {
                 });
             }
 
-            if (!schoolId || isNaN(Number(schoolId))) {
+            if (!id || isNaN(Number(id))) {
                 return res.status(400).json({
                     success: false,
-                    message: 'ID de escuela invalido'
+                    message: 'ID de alumno inválido'
                 })
             }
 
-            const student = await this.studentService.getStudentById(userId, Number(schoolId));
+            const student = await this.studentService.getStudentById(userId, Number(id));
 
             return res.status(200).json({
                 success: true,
@@ -137,7 +137,7 @@ export class StudentController {
     updateStudent = async (req: Request, res: Response) => {
         try {
             const userId = req.user?.id;
-            const { studentId } = req.params;
+            const { id } = req.params;
 
             if (!userId) {
                 return res.status(401).json({
@@ -148,7 +148,7 @@ export class StudentController {
 
             const updatedStudent = await this.studentService.updateStudent(
                 userId,
-                Number(studentId),
+                Number(id),
                 req.body
             );
 
@@ -176,7 +176,7 @@ export class StudentController {
     deleteStudent = async (req: Request, res: Response) => {
         try {
             const userId = req.user?.id;
-            const { studentId } = req.params;
+            const { id } = req.params;
             if (!userId) {
                 return res.status(401).json({
                     success: false,
@@ -185,7 +185,7 @@ export class StudentController {
             }
             await this.studentService.deleteStudent(
                 userId,
-                Number(studentId)
+                Number(id)
             );
             return res.status(200).json({
                 success: true,
