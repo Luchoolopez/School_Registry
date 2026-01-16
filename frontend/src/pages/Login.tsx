@@ -21,7 +21,7 @@ export function Login() {
 
     try {
       await login(username, password);
-      navigate('/dashboard');
+      navigate('/');
     } catch (err: any) {
       const errorMsg = err.response?.data?.message || 'Error al iniciar sesión. Verifique sus credenciales.';
       setError(errorMsg);
@@ -44,7 +44,7 @@ export function Login() {
 
       <main className="flex-1 flex items-center justify-center p-4 sm:p-6">
         
-        <div className="w-full max-w-sm bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-6 sm:p-8">
+        <div className="card-centered">
           
           <div className="text-center mb-8">
             <h1 className="text-[#0d131b] dark:text-white text-2xl font-bold leading-tight">Iniciar Sesión</h1>
@@ -107,7 +107,7 @@ export function Login() {
               <button 
                 type="submit" 
                 disabled={loading}
-                className="flex w-full cursor-pointer items-center justify-center rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] shadow-md shadow-primary/20 active:scale-[0.98] active:translate-y-0.5 transition-all disabled:opacity-70 disabled:cursor-not-allowed hover:bg-blue-600"
+                className="btn-primary disabled:opacity-70 disabled:cursor-not-allowed hover:opacity-95"
               >
                 {loading ? (
                    <span className="flex items-center gap-2">
