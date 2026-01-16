@@ -3,12 +3,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getSchoolColor } from '../utils/uiHelpers.ts';
 import type { School } from '../../types/school.types';
+import SchoolActions from './SchoolActions';
 
 interface Props {
   school: School;
+  onUpdated?: (s: School) => void;
+  onDeleted?: (id: number) => void;
 }
 
-export const SchoolCard: React.FC<Props> = ({ school }) => {
+export const SchoolCard: React.FC<Props> = ({ school, onUpdated, onDeleted }) => {
   const navigate = useNavigate();
   const theme = getSchoolColor(school.id);
 
@@ -40,6 +43,9 @@ export const SchoolCard: React.FC<Props> = ({ school }) => {
               </span>
             </div>
           </div>
+        </div>
+        <div className="ml-auto">
+          <SchoolActions school={school} onUpdated={onUpdated} onDeleted={onDeleted} />
         </div>
       </div>
 

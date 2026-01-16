@@ -54,8 +54,13 @@ export const DashboardSchool: React.FC = () => {
       ) : (
         <div className="space-y-4 pb-24">
           {filteredSchools.length > 0 ? (
-            filteredSchools.map((school) => (
-              <SchoolCard key={school.id} school={school} />
+            filteredSchools.map((school: School) => (
+              <SchoolCard 
+                key={school.id} 
+                school={school} 
+                onUpdated={(s: School) => setSchools(prev => prev.map(p => p.id === s.id ? s : p))}
+                onDeleted={(id: number) => setSchools(prev => prev.filter(p => p.id !== id))}
+              />
             ))
           ) : (
             <div className="text-center py-10 text-gray-400">
