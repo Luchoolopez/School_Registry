@@ -8,6 +8,7 @@ interface StudentAttributes {
     last_name: string;
     createdAt?: Date;
     updatedAt?: Date;
+    //deletedAt?: Date;
 }
 
 export type StudentCreationAttributes = Optional<StudentAttributes, 'id' | 'createdAt' | 'updatedAt'>;
