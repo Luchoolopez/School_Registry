@@ -29,6 +29,14 @@ export class AbsenceController {
                 data: absence
             });
         } catch (error: any) {
+            if (error.name === 'SequelizeUniqueConstraintError') {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Ya existe una falta registrada para este alumno en esa fecha.',
+                    error: 'Duplicado'
+                });
+            }
+
             if (error.message.includes('no encontrada') || error.message.includes('acceso')) {
                 return res.status(404).json({
                     success: false,
@@ -65,6 +73,13 @@ export class AbsenceController {
                 data: absence
             });
         } catch (error: any) {
+            if (error.message.includes('no encontrada') || error.message.includes('acceso')) {
+                return res.status(404).json({
+                    success: false,
+                    message: error.message
+                });
+            }
+            
             return res.status(500).json({
                 success: false,
                 message: 'Error al actualizar la justificación',
@@ -88,8 +103,15 @@ export class AbsenceController {
                 success: true,
                 message: 'Falta eliminada exitosamente'
             });
-            
+
         } catch (error: any) {
+            if (error.message.includes('no encontrada') || error.message.includes('acceso')) {
+                return res.status(404).json({
+                    success: false,
+                    message: error.message
+                });
+            }
+
             return res.status(500).json({
                 success: false,
                 message: 'Error al eliminar la ausencia',
