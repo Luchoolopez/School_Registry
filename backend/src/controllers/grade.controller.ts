@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { ValidationError as SequelizeValidationError } from 'sequelize';
 import { GradeService } from "../services/grade.service";
 
 export class GradeController {
@@ -31,12 +32,21 @@ export class GradeController {
                 data: grade
             })
         } catch (error: any) {
+            if (error instanceof SequelizeValidationError) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Error de validación de la nota',
+                    errors: error.errors.map((e: any) => ({ message: e.message, path: e.path }))
+                });
+            }
+
             if (error.message.includes('no encontrada') || error.message.includes('acceso')) {
                 return res.status(404).json({
                     success: false,
                     message: error.message
                 });
             }
+
             return res.status(500).json({
                 success: false,
                 message: 'Error al registrar la nota',
@@ -69,12 +79,21 @@ export class GradeController {
                 data: grade
             });
         } catch (error: any) {
+            if (error instanceof SequelizeValidationError) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Error de validación al actualizar la nota',
+                    errors: error.errors.map((e: any) => ({ message: e.message, path: e.path }))
+                });
+            }
+
             if (error.message.includes('no encontrada') || error.message.includes('acceso')) {
                 return res.status(404).json({
                     success: false,
                     message: error.message
                 });
             }
+
             return res.status(500).json({
                 success: false,
                 message: 'Error al actualizar la nota',

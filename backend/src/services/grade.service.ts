@@ -55,10 +55,12 @@ export class GradeService {
             include: [{
                 model: Student,
                 as: 'student',
+                required: true,
                 include: [{
                     model: School,
                     as: 'school',
-                    where: { user_id: userId }
+                    where: { user_id: userId },
+                    required: true
                 }]
             }]
         });
