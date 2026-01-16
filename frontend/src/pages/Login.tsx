@@ -23,7 +23,7 @@ export function Login() {
 
         try {
             await login(username, password);
-            navigate('/');
+            navigate('/escuelas');
         } catch (err: any) {
             const errorMsg = err.response?.data?.message || 'Error al iniciar sesión. Verifique sus credenciales.';
             setError(errorMsg);
@@ -41,7 +41,7 @@ export function Login() {
                         <span className="material-symbols-outlined select-none">school</span>
                     </div>
                     <h2 className="text-[#0d131b] dark:text-white text-base font-bold leading-tight tracking-[-0.015em]">
-                        Dashboard Docentes
+                        MisColegios
                     </h2>
                 </div>
 
