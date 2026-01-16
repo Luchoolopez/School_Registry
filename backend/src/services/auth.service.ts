@@ -15,9 +15,14 @@ export class AuthService {
       throw new Error('Credenciales inválidas');
     }
 
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+      throw new Error('JWT secret no está definido en las variables de entorno');
+    }
+
     const token = jwt.sign(
       { id: user.id, role: user.role, username: user.username },
-      process.env.JWT_SECRET || 'secreto_super_seguro_por_defecto',
+      secret,
       { expiresIn: '12h' }
     );
 
