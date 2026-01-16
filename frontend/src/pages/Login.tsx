@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthActions, useTheme } from '../context'; 
+import { useAuthActions, useTheme } from '../context';
+import Toggle from '../components/base/toggle/Toggle';
 
 export function Login() {
     const navigate = useNavigate();
@@ -45,15 +46,16 @@ export function Login() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                    <button
-                        onClick={() => toggle()}
-                        aria-label="Alternar tema"
-                        className="inline-flex items-center justify-center h-10 w-10 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
-                    >
-                        <span className="material-symbols-outlined text-lg select-none">
-                            {theme === 'dark' ? 'dark_mode' : theme === 'light' ? 'light_mode' : (document.documentElement.classList.contains('dark') ? 'dark_mode' : 'light_mode')}
-                        </span>
-                    </button>
+                    <div className="flex items-center">
+                        <React.Suspense fallback={<div className="w-14 h-8 bg-gray-200 rounded-full animate-pulse" />}>
+                            <Toggle
+                                isThemeToggle={true}
+                                checked={theme === 'dark' || (theme === 'system' && document.documentElement.classList.contains('dark'))}
+                                onChange={() => toggle()}
+                                size="md"
+                            />
+                        </React.Suspense>
+                    </div>
                 </div>
             </div>
 
