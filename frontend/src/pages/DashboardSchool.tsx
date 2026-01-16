@@ -11,7 +11,9 @@ export const DashboardSchool: React.FC = () => {
   const [schools, setSchools] = useState<School[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-    const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [sortByName, setSortByName] = useState(false);
+  const [yearFilter, setYearFilter] = useState('');
 
   useEffect(() => {
     const fetchSchools = async () => {
@@ -28,40 +30,50 @@ export const DashboardSchool: React.FC = () => {
     fetchSchools();
   }, []);
 
-  const filteredSchools = schools.filter(s => 
-    s.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    s.academic_year.toString().includes(searchTerm)
-  );
+  const filteredSchools = schools.filter(s => {
+    const matchesSearch = s.name.toLowerCase().includes(searchTerm.toLowerCase()) || s.academic_year.toString().includes(searchTerm);
+    const matchesYear = yearFilter ? s.academic_year === Number(yearFilter) : true;
+    return matchesSearch && matchesYear;
+  });
 
   const handleCreated = (school: School) => {
     setSchools(prev => [school, ...prev]);
   };
 
   return (
-    <div className="w-full max-w-md mx-auto md:max-w-3xl animate-in fade-in duration-500">
+    <div className="w-full max-w-7xl mx-auto px-4 animate-in fade-in duration-500">
       
-      <DashboardHeader onCreate={() => setModalOpen(true)} />
+      <DashboardHeader
+        onCreate={() => setModalOpen(true)}
+        sortByName={sortByName}
+        onToggleSortName={() => setSortByName(prev => !prev)}
+        yearFilter={yearFilter}
+        onYearChange={(v) => setYearFilter(v)}
+        onClearYear={() => setYearFilter('')}
+      />
       
       <SchoolSearch value={searchTerm} onChange={setSearchTerm} />
       <CreateSchoolModal isOpen={modalOpen} onClose={() => setModalOpen(false)} onCreated={handleCreated} />
 
       {loading ? (
-        <div className="space-y-4">
-          {[1, 2, 3].map(i => (
-            <div key={i} className="h-32 bg-gray-100 dark:bg-slate-800 rounded-lg animate-pulse" />
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {[1, 2, 3, 4].map(i => (
+            <div key={i} className="h-40 bg-gray-100 dark:bg-slate-800 rounded-lg animate-pulse" />
           ))}
         </div>
       ) : (
-        <div className="space-y-4 pb-24">
-          {filteredSchools.length > 0 ? (
-            filteredSchools.map((school: School) => (
-              <SchoolCard 
-                key={school.id} 
-                school={school} 
-                onUpdated={(s: School) => setSchools(prev => prev.map(p => p.id === s.id ? s : p))}
-                onDeleted={(id: number) => setSchools(prev => prev.filter(p => p.id !== id))}
-              />
-            ))
+        <div className="pb-24">
+          { (filteredSchools.length > 0) ? (
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              { (sortByName ? [...filteredSchools].sort((a,b) => a.name.localeCompare(b.name)) : filteredSchools).map((school: School) => (
+                <SchoolCard 
+                  key={school.id} 
+                  school={school} 
+                  onUpdated={(s: School) => setSchools(prev => prev.map(p => p.id === s.id ? s : p))}
+                  onDeleted={(id: number) => setSchools(prev => prev.filter(p => p.id !== id))}
+                />
+              ))}
+            </div>
           ) : (
             <div className="text-center py-10 text-gray-400">
               <span className="material-symbols-outlined text-4xl mb-2">school</span>

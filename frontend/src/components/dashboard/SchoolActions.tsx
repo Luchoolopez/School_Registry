@@ -33,19 +33,39 @@ export const SchoolActions: React.FC<Props> = ({ school, onUpdated, onDeleted })
   };
 
   return (
-    <div className="flex items-center gap-2">
-      <button onClick={() => setEditing(true)} className="inline-flex items-center gap-1 px-2 py-1 rounded-md border border-gray-200 dark:border-gray-700 text-sm hover:bg-gray-100 dark:hover:bg-slate-800">
-        <span className="material-symbols-outlined text-sm">edit</span>
-        <span>Editar</span>
+    <div className="flex items-center gap-1">
+      <button 
+        onClick={() => setEditing(true)} 
+        title="Editar escuela"
+        className="p-1.5 rounded-full text-slate-400 hover:text-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+      >
+        <span className="material-symbols-outlined text-[20px]">edit</span>
       </button>
 
-      <button onClick={handleDelete} disabled={deleting} className="inline-flex items-center gap-1 px-2 py-1 rounded-md border border-red-200 text-sm text-red-600 hover:bg-red-50">
-        <span className="material-symbols-outlined text-sm">delete</span>
-        <span>{deleting ? 'Eliminando...' : 'Eliminar'}</span>
+      <button 
+        onClick={handleDelete} 
+        disabled={deleting} 
+        title="Eliminar escuela"
+        className="p-1.5 rounded-full text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+      >
+        <span className="material-symbols-outlined text-[20px]">delete</span>
       </button>
 
-      <EditSchoolModal isOpen={editing} onClose={() => setEditing(false)} school={school} onUpdated={(s) => { onUpdated && onUpdated(s); setEditing(false); }} />
-      <DeleteConfirmModal isOpen={confirmOpen} onClose={() => setConfirmOpen(false)} onConfirm={handleConfirmDelete} loading={deleting} />
+      {editing && (
+        <EditSchoolModal 
+            isOpen={editing} 
+            onClose={() => setEditing(false)} 
+            school={school} 
+            onUpdated={(s) => { onUpdated && onUpdated(s); setEditing(false); }} 
+        />
+      )}
+      
+      <DeleteConfirmModal 
+        isOpen={confirmOpen} 
+        onClose={() => setConfirmOpen(false)} 
+        onConfirm={handleConfirmDelete} 
+        loading={deleting} 
+      />
     </div>
   );
 };
