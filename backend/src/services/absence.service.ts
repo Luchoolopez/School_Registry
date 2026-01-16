@@ -35,8 +35,9 @@ export class AbsenceService {
                 as: 'student',
                 include:[{
                     model: School,
-                    as:'School',
+                    as: 'school',
                     where: { user_id: userId },
+                    required: true
                 }]
             }]
         });
