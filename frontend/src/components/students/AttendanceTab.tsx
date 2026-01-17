@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { Student } from '../../types/student.types';
 import absenceService from '../../services/absence.service';
-import { ConfirmModal } from './base/confirmModal';
+import { ConfirmModal } from '../ConfirmModal';
 
 interface Props {
   student: Student;

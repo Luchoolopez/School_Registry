@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import type { Student } from '../../types/student.types';
 import type { Grade } from '../../types/grade.types';
 import gradeService from '../../services/grade.service';
-import { ConfirmModal } from './base/confirmModal';    
+import { ConfirmModal } from '../ConfirmModal';    
 import { EditGradeModal } from './base/EditGradeModal'; 
 import { CreateGradeModal } from './base/CreateGradeModal'; 
 
