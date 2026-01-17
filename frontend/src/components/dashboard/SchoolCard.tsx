@@ -22,19 +22,14 @@ export const SchoolCard: React.FC<Props> = ({ school, onUpdated, onDeleted }) =>
   return (
     <div className="bg-white dark:bg-[#1a232e] rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 p-5 flex flex-col h-full hover:border-primary/30 hover:shadow-md transition-all duration-200">
       
-      {/* --- ENCABEZADO SUPERIOR --- */}
-      {/* items-start asegura que si el texto crece, el icono y botones se queden arriba */}
       <div className="flex justify-between items-start gap-4 mb-4">
         
-        {/* Lado Izquierdo: Icono y Textos (Ocupa el espacio disponible con flex-1) */}
         <div className="flex gap-3 min-w-0 flex-1">
-          {/* Icono */}
           <div className={`w-12 h-12 shrink-0 rounded-lg flex items-center justify-center ${theme.bg} ${theme.text}`}>
             <span className="material-symbols-outlined text-[24px]">{theme.icon}</span>
           </div>
 
-          {/* Contenedor de Texto */}
-          <div className="flex flex-col"> {/* Quitamos pt-0.5 para alinear arriba */}
+          <div className="flex flex-col"> 
             <h3 className="text-sm font-bold text-slate-900 dark:text-white leading-tight break-words pr-1">
               {school.name}
             </h3>
@@ -44,13 +39,11 @@ export const SchoolCard: React.FC<Props> = ({ school, onUpdated, onDeleted }) =>
           </div>
         </div>
 
-        {/* Lado Derecho: Acciones */}
-        <div className="shrink-0"> {/* Quitamos márgenes negativos para dar aire */}
+        <div className="shrink-0">
              <SchoolActions school={school} onUpdated={onUpdated} onDeleted={onDeleted} />
         </div>
       </div>
 
-      {/* --- ESPACIADOR INFERIOR (Footer de la card) --- */}
       <div className="mt-auto">
         <div className="flex items-center gap-2 mb-3 text-xs text-slate-400 dark:text-slate-500 px-1">
             <span className="material-symbols-outlined text-[16px]">groups</span>
