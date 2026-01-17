@@ -24,6 +24,13 @@ export class AuthController {
                 });
             }
 
+            if (error.message === 'Cuenta inactiva') {
+                return res.status(403).json({
+                    success: false,
+                    message: 'Cuenta inactiva. Contacte al administrador.'
+                });
+            }
+
             return res.status(500).json({
                 success: false,
                 message: 'Error interno del servidor ',

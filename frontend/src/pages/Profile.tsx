@@ -23,15 +23,7 @@ export const Profile: React.FC = () => {
 
   return (
     <div className="bg-background-light dark:bg-background-dark min-h-screen pb-12">
-      
-      <div className="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md p-4 justify-between border-b border-slate-200/50 dark:border-slate-800/50">
-        <button onClick={() => navigate(-1)} className="text-slate-900 dark:text-white flex size-10 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
-          <span className="material-symbols-outlined text-[20px]">arrow_back_ios_new</span>
-        </button>
-        <h2 className="text-slate-900 dark:text-white text-base font-bold leading-tight tracking-tight">Mi Perfil</h2>
-        <div className="size-10"></div> 
-      </div>
-
+    
       <main className="max-w-md mx-auto px-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
         
         <ProfileHeader user={user} />
@@ -48,9 +40,10 @@ export const Profile: React.FC = () => {
             <span className="material-symbols-outlined">logout</span>
             Cerrar Sesión
           </button>
-          <p className="text-center text-slate-400 dark:text-slate-600 text-xs font-mono">
+          {/*Aca tendria que poner mis datos personales / portafolio */}
+          {/*<p className="text-center text-slate-400 dark:text-slate-600 text-xs font-mono">
             Versión del Sistema 1.0.0
-          </p>
+          </p>*/}
         </div>
 
       </main>

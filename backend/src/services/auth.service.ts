@@ -15,6 +15,10 @@ export class AuthService {
       throw new Error('Credenciales inválidas');
     }
 
+    if (user.active === false) {
+      throw new Error('Cuenta inactiva');
+    }
+
     const secret = process.env.JWT_SECRET;
     if (!secret) {
       throw new Error('JWT secret no está definido en las variables de entorno');
@@ -33,6 +37,8 @@ export class AuthService {
         username: user.username,
         dni: user.dni,
         role: user.role
+        ,
+        active: user.active
       }
     };
   }

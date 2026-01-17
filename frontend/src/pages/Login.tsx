@@ -22,6 +22,7 @@ export function Login() {
         setLoading(true);
 
         try {
+
             await login(username.trim(), password);
             navigate('/');
         } catch (err: any) {

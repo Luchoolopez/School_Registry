@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import userService from '../../services/user.service'; 
 import type { User } from '../../types/user.types';
 import { UserTable } from '../../components/admin/UserTable';
 import { CreateUserModal } from '../../components/admin/CreateUserModal';
 import { ConfirmModal } from '../../components/ConfirmModal'; // Asumo la ruta
 import { AdminHeader } from '../../components/admin/AdminHeader';   // IMPORTAR HEADER
+import { AuthContext } from '../../context/AuthContext';
 
 export const AdminDashboard: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -14,6 +15,7 @@ export const AdminDashboard: React.FC = () => {
   
   const [userToAction, setUserToAction] = useState<User | null>(null);
   const [actionType, setActionType] = useState<'toggle' | 'delete' | null>(null);
+  const authCtx = useContext(AuthContext);
 
   const fetchUsers = async () => {
     try {
@@ -45,6 +47,10 @@ export const AdminDashboard: React.FC = () => {
     try {
       const updated = await userService.toggleUserStatus(userToAction.id); 
       setUsers(prev => prev.map(u => u.id === updated.id ? updated : u));
+
+      if (authCtx && authCtx.user && authCtx.user.id === updated.id) {
+        authCtx.setAuth({ user: updated, token: authCtx.token });
+      }
       
       setUserToAction(null);
       setActionType(null);
