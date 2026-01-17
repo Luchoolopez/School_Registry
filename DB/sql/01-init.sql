@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS users (
     dni VARCHAR(20) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL, -- Guardará el hash de bcrypt
     role ENUM('admin', 'docente') DEFAULT 'docente',
+    active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
 );

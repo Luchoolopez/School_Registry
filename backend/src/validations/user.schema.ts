@@ -16,5 +16,16 @@ export const registerSchema = z.object({
   }),
 });
 
+export const updateUserSchema = z.object({
+  body: z.object({
+    username: z.string().min(3).optional(),
+    dni: z.string().min(7).optional(),
+    password: z.string().min(6).optional(),
+    role: z.enum(['admin', 'docente']).optional(),
+    active: z.boolean().optional(),
+  }),
+});
+
 export type LoginInput = z.infer<typeof loginSchema>['body'];
 export type RegisterInput = z.infer<typeof registerSchema>['body'];
+export type UpdateUserInput = z.infer<typeof updateUserSchema>['body'];

@@ -7,11 +7,12 @@ interface UserAttributes {
     dni:string;
     password: string;
     role: 'admin' | 'docente';
+    active: boolean;
     createdAt?: Date;
     updatedAt?: Date;
 }
 
-export type UserCreationAttributes = Optional<UserAttributes, 'id' | 'createdAt' | 'updatedAt'>;
+export type UserCreationAttributes = Optional<UserAttributes, 'id' | 'createdAt' | 'updatedAt' | 'active'>;
 
 export class User extends Model<UserAttributes, UserCreationAttributes>
     implements UserAttributes {
@@ -20,6 +21,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes>
     public dni!:string;
     public password!: string;
     public role!: 'admin' | 'docente';
+    public active!: boolean;
 
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
@@ -49,6 +51,11 @@ User.init(
             type: DataTypes.ENUM('admin', 'docente'),
             allowNull: false,
             defaultValue: 'docente',
+        },
+        active: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true,
         },
     },
     {
