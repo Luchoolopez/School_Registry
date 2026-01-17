@@ -11,10 +11,10 @@ export const Header: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const userStr = localStorage.getItem('user');
-  const user = userStr ? JSON.parse(userStr) : { username: 'Docente' };
+  const user = userStr ? JSON.parse(userStr) : { username: 'Docente', role: 'docente' };
 
   const getInitials = (name: string) => {
-    return name.substring(0, 2).toUpperCase();
+    return name ? name.substring(0, 2).toUpperCase() : 'US';
   };
 
   const handleLogout = () => {
@@ -69,8 +69,8 @@ export const Header: React.FC = () => {
                   <span className="text-sm font-semibold text-slate-700 dark:text-slate-200 leading-tight">
                     {user.username}
                   </span>
-                  <span className="text-[10px] text-slate-500 dark:text-slate-400">
-                    Docente
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 capitalize">
+                    {user.role || 'Docente'}
                   </span>
                 </div>
 
@@ -80,11 +80,11 @@ export const Header: React.FC = () => {
               </button>
 
               {isMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-100 dark:border-slate-700 py-1 animate-in fade-in zoom-in-95 duration-200 origin-top-right">
+                <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-100 dark:border-slate-700 py-1 animate-in fade-in zoom-in-95 duration-200 origin-top-right">
                   
                   <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-700 md:hidden">
                     <p className="text-sm font-medium text-slate-900 dark:text-white truncate">{user.username}</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Docente</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 capitalize">{user.role}</p>
                     
                     <div className="mt-2 flex justify-between items-center">
                         <span className="text-xs text-slate-500">Tema</span>
@@ -97,10 +97,24 @@ export const Header: React.FC = () => {
                     </div>
                   </div>
 
-                  <a href="#" className="block px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-2">
+                  <button className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-2">
                     <span className="material-symbols-outlined text-[18px]">person</span>
                     Mi Perfil
-                  </a>
+                  </button>
+
+                  {user?.role === 'admin' && (
+                    <button 
+                        onClick={() => {
+                            navigate('/admin');
+                            setIsMenuOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-2 text-sm text-primary dark:text-blue-400 font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-2"
+                    >
+                        <span className="material-symbols-outlined text-[18px]">admin_panel_settings</span>
+                        Panel de Admin
+                    </button>
+                  )}
+                  
                   
                   <div className="border-t border-slate-100 dark:border-slate-700 my-1"></div>
                   

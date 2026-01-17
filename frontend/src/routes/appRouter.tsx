@@ -6,6 +6,8 @@ import { DashboardSchool } from '../pages/DashboardSchool';
 import { MainLayout } from '../layout/MainLayout';
 import { StudentList } from '../pages/StudentList';
 
+import { AdminDashboard } from '../pages/admin/AdminDashboard';
+
 export function AppRouter() {
     return (
         <Routes>
@@ -17,7 +19,7 @@ export function AppRouter() {
             </Route>
 
             <Route element={<AdminRoute />}>
-                <Route path="/admin" element={<div>Panel de Administracion</div>} />
+                <Route path="/admin" element={<AdminDashboard />} />
             </Route>
         </Routes>
     )
