@@ -19,8 +19,13 @@ export const userService = {
   },
 
   async toggleUserStatus(id: number): Promise<User> {
-    const res = await apiClient.delete(`/user/${id}`);
+    const res = await apiClient.patch(`/user/${id}/toggle`);
     return res.data.data as User;
+  }
+  ,
+
+  async deleteUser(id: number): Promise<void> {
+    await apiClient.delete(`/user/${id}`);
   }
 };
 

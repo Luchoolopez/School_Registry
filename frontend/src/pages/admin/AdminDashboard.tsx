@@ -11,6 +11,7 @@ export const AdminDashboard: React.FC = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
   
   const [userToAction, setUserToAction] = useState<User | null>(null);
+  const [actionType, setActionType] = useState<'toggle' | 'delete' | null>(null);
 
   const fetchUsers = async () => {
     try {
@@ -31,16 +32,26 @@ export const AdminDashboard: React.FC = () => {
   const handleToggleStatus = async () => {
     if (!userToAction) return;
     try {
-      setUsers(prev => prev.map(u => 
-        u.id === userToAction.id ? { ...u, active: !u.active } : u
-      ));
-      
-      await userService.toggleUserStatus(userToAction.id);
-      
+      const updated = await userService.toggleUserStatus(userToAction.id);
+      setUsers(prev => prev.map(u => u.id === updated.id ? updated : u));
       setUserToAction(null);
+      setActionType(null);
     } catch (error) {
       console.error(error);
       fetchUsers(); 
+    }
+  };
+
+  const handleDeleteUser = async () => {
+    if (!userToAction) return;
+    try {
+      await userService.deleteUser(userToAction.id);
+      setUsers(prev => prev.filter(u => u.id !== userToAction.id));
+      setUserToAction(null);
+      setActionType(null);
+    } catch (error) {
+      console.error(error);
+      fetchUsers();
     }
   };
 
@@ -64,8 +75,8 @@ export const AdminDashboard: React.FC = () => {
       <UserTable 
         users={users} 
         loading={loading} 
-        onToggleStatus={(user) => setUserToAction(user)}
-        onDelete={(user) => setUserToAction(user)}
+        onToggleStatus={(user) => { setActionType('toggle'); setUserToAction(user); }}
+        onDelete={(user) => { setActionType('delete'); setUserToAction(user); }}
       />
 
       <CreateUserModal 
@@ -76,12 +87,12 @@ export const AdminDashboard: React.FC = () => {
 
       <ConfirmModal 
         isOpen={!!userToAction}
-        title={userToAction?.active ? "Desactivar Usuario" : "Activar Usuario"}
-        message={`¿Deseas cambiar el estado de ${userToAction?.username}?`}
-        confirmText={userToAction?.active ? "Desactivar" : "Activar"}
-        isDanger={userToAction?.active} 
-        onClose={() => setUserToAction(null)}
-        onConfirm={handleToggleStatus}
+        title={actionType === 'delete' ? 'Eliminar Usuario' : (userToAction?.active ? 'Desactivar Usuario' : 'Activar Usuario')}
+        message={actionType === 'delete' ? `¿Deseas eliminar permanentemente a ${userToAction?.username}?` : `¿Deseas cambiar el estado de ${userToAction?.username}?`}
+        confirmText={actionType === 'delete' ? 'Eliminar' : (userToAction?.active ? 'Desactivar' : 'Activar')}
+        isDanger={actionType === 'delete' || userToAction?.active} 
+        onClose={() => { setUserToAction(null); setActionType(null); }}
+        onConfirm={actionType === 'delete' ? handleDeleteUser : handleToggleStatus}
       />
     </div>
   );

@@ -66,6 +66,20 @@ export class UserController {
       return res.status(400).json({ success: false, message: error.message });
     }
   };
+
+  deletePermanent = async (req: Request, res: Response) => {
+    try {
+      if (!req.user || req.user.role !== 'admin') {
+        return res.status(403).json({ success: false, message: 'Acceso denegado' });
+      }
+
+      const id = Number(req.params.id);
+      await this.userService.deleteUser(id as any);
+      return res.status(200).json({ success: true, message: 'Usuario eliminado permanentemente' });
+    } catch (error: any) {
+      return res.status(400).json({ success: false, message: error.message });
+    }
+  };
 }
 
 export default new UserController();

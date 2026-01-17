@@ -44,5 +44,12 @@ export class UserService {
         const { password, ...rest } = user.get({ plain: true }) as any;
         return rest;
     }
+
+    async deleteUser(id: number) {
+        const user = await User.findByPk(id);
+        if (!user) throw new Error('Usuario no encontrado');
+        await user.destroy();
+        return true;
+    }
 }
 
