@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { StudentHeader } from '../components/students/StudentHeader';
 import CreateStudentModal from '../components/students/CreateStudentModal';
+import EditStudentModal from '../components/students/EditStudentModal';
 import { StudentTable } from '../components/students/StudentTable';
 import studentService from '../services/student.service';
 //import schoolService from '../services/school.service'; // Para sacar el nombre de la escuela si lo necesitas
 import type { Student } from '../types/student.types';
-import * as XLSX from 'xlsx'; // npm install xlsx
+import * as XLSX from 'xlsx'; 
 
 export const StudentList: React.FC = () => {
   const { schoolId } = useParams<{ schoolId: string }>();
@@ -16,6 +17,8 @@ export const StudentList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   // Cargar datos
   useEffect(() => {
@@ -42,12 +45,22 @@ export const StudentList: React.FC = () => {
   );
 
   const handleCreate = () => setShowCreateModal(true);
-  const handleEdit = (s: Student) => console.log("Editar", s);
+  const handleEdit = (s: Student) => {
+    setSelectedStudent(s);
+    setShowEditModal(true);
+  };
   const handleDelete = (s: Student) => console.log("Borrar", s);
   const handleClick = (s: Student) => console.log("Ver detalle completo (modal notas)", s);
 
   const handleCreated = (newStudent: Student) => {
     setStudents((prev) => [newStudent, ...prev]);
+  };
+
+  const handleUpdated = (updated: Student) => {
+    setStudents((prev) => prev.map(p => p.id === updated.id ? updated : p));
+    if (selectedStudent && selectedStudent.id === updated.id) {
+      setSelectedStudent(updated);
+    }
   };
 
   const handleExport = () => {
@@ -87,6 +100,12 @@ export const StudentList: React.FC = () => {
         onClose={() => setShowCreateModal(false)}
         schoolId={Number(schoolId)}
         onCreated={handleCreated}
+      />
+      <EditStudentModal
+        isOpen={showEditModal}
+        student={selectedStudent}
+        onClose={() => { setShowEditModal(false); setSelectedStudent(null); }}
+        onUpdated={(s) => { handleUpdated(s); }}
       />
     </div>
   );
