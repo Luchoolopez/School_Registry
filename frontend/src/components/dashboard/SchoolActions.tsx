@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import MessageModal from '../MessageModal';
 import type { School } from '../../types/school.types';
 import schoolService from '../../services/school.service';
 import EditSchoolModal from './EditSchoolModal';
@@ -14,6 +15,9 @@ export const SchoolActions: React.FC<Props> = ({ school, onUpdated, onDeleted })
   const [editing, setEditing] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [msgOpen, setMsgOpen] = useState(false);
+  const [msgTitle, setMsgTitle] = useState('');
+  const [msgMessage, setMsgMessage] = useState('');
 
   const handleDelete = () => {
     setConfirmOpen(true);
@@ -26,13 +30,16 @@ export const SchoolActions: React.FC<Props> = ({ school, onUpdated, onDeleted })
       onDeleted && onDeleted(school.id);
       setConfirmOpen(false);
     } catch (err: any) {
-      alert(err?.response?.data?.message || 'Error al eliminar la escuela');
+      setMsgTitle('Error');
+      setMsgMessage(err?.response?.data?.message || 'Error al eliminar la escuela');
+      setMsgOpen(true);
     } finally {
       setDeleting(false);
     }
   };
 
   return (
+    <>
     <div className="flex items-center gap-1">
       <button 
         onClick={() => setEditing(true)} 
@@ -67,6 +74,8 @@ export const SchoolActions: React.FC<Props> = ({ school, onUpdated, onDeleted })
         loading={deleting} 
       />
     </div>
+    <MessageModal isOpen={msgOpen} title={msgTitle} message={msgMessage} onClose={() => setMsgOpen(false)} />
+    </>
   );
 };
 

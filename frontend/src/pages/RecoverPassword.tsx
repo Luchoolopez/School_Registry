@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import MessageModal from '../components/MessageModal';
 
 const RecoverPassword: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -31,8 +32,9 @@ const RecoverPassword: React.FC = () => {
       setLoading(true);
       const emailService = (await import('../services/email.service')).default;
       await emailService.reset(token, password);
-      alert('Contraseña actualizada correctamente. Ahora puedes iniciar sesión.');
-      navigate('/iniciar-sesion');
+      setMsgTitle('Contraseña actualizada');
+      setMsgMessage('Contraseña actualizada correctamente. Ahora puedes iniciar sesión.');
+      setMsgOpen(true);
     } catch (err: any) {
       console.error(err);
       setError(err.response?.data?.message || err.message || 'Error al restablecer la contraseña.');
@@ -40,6 +42,10 @@ const RecoverPassword: React.FC = () => {
       setLoading(false);
     }
   };
+
+  const [msgOpen, setMsgOpen] = useState(false);
+  const [msgTitle, setMsgTitle] = useState('');
+  const [msgMessage, setMsgMessage] = useState('');
 
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark flex items-center justify-center p-4">
@@ -81,6 +87,7 @@ const RecoverPassword: React.FC = () => {
           </div>
         </form>
       </div>
+      <MessageModal isOpen={msgOpen} title={msgTitle} message={msgMessage} onClose={() => { setMsgOpen(false); navigate('/iniciar-sesion'); }} />
     </div>
   );
 };

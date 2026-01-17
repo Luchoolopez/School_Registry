@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth'; 
 import { ProfileHeader } from '../components/profile/ProfileHeader';
 import { ProfileInfo } from '../components/profile/ProfileInfo';
 import { ProfileSecurity } from '../components/profile/ProfileSecurity';
+import MessageModal from '../components/MessageModal';
 
 export const Profile: React.FC = () => {
   const navigate = useNavigate();
@@ -20,19 +21,33 @@ export const Profile: React.FC = () => {
     const sendReset = async () => {
       try {
         if (!user.email) {
-          alert('No hay email asociado a esta cuenta. Contacte al administrador.');
+          setMsgTitle('Sin email');
+          setMsgMessage('No hay email asociado a esta cuenta. Contacte al administrador.');
+          setMsgOnClose(() => null);
+          setMsgOpen(true);
           return;
         }
         const emailService = (await import('../services/email.service')).default;
         await emailService.forgot(user.email);
-        alert('Se envió un correo para restablecer la contraseña.');
+        setMsgTitle('Correo enviado');
+        setMsgMessage('Se envió un correo para restablecer la contraseña. Revisa tu bandeja de entrada.');
+        setMsgOnClose(() => null);
+        setMsgOpen(true);
       } catch (err: any) {
         console.error(err);
-        alert(err.response?.data?.message || 'Error enviando el correo.');
+        setMsgTitle('Error');
+        setMsgMessage(err.response?.data?.message || 'Error enviando el correo.');
+        setMsgOnClose(() => null);
+        setMsgOpen(true);
       }
     };
     sendReset();
   };
+
+  const [msgOpen, setMsgOpen] = useState(false);
+  const [msgTitle, setMsgTitle] = useState('');
+  const [msgMessage, setMsgMessage] = useState('');
+  const [msgOnClose, setMsgOnClose] = useState<null | (() => void)>(null);
 
   if (!user) return null;
 
@@ -62,6 +77,7 @@ export const Profile: React.FC = () => {
         </div>
 
       </main>
+      <MessageModal isOpen={msgOpen} title={msgTitle} message={msgMessage} onClose={() => { setMsgOpen(false); if (msgOnClose) msgOnClose(); }} />
     </div>
   );
 };
