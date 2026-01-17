@@ -65,7 +65,7 @@ export const DashboardSchool: React.FC = () => {
         <div className="pb-24">
           { (filteredSchools.length > 0) ? (
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              { (sortByName ? [...filteredSchools].sort((a,b) => a.name.localeCompare(b.name)) : filteredSchools).map((school: School) => (
+              { ([...filteredSchools].sort((a,b) => sortByName ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name))).map((school: School) => (
                 <SchoolCard 
                   key={school.id} 
                   school={school} 
