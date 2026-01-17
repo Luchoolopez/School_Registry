@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import type { Student } from '../../types/student.types';
 import absenceService from '../../services/absence.service';
 import { ConfirmModal } from '../ConfirmModal';
-import { CreateAbsenceModal } from './CreateAbsenceModal';
+import { CreateAbsenceModal } from '../students/CreateAbsenceModal';
+import { CalculateAttendanceModal } from './base/CalculateAttendanceModal'; 
 
 interface Props {
   student: Student;
@@ -11,6 +12,7 @@ interface Props {
 
 export const AttendanceTab: React.FC<Props> = ({ student, onRefresh }) => {
   const [isAdding, setIsAdding] = useState(false);
+  const [isCalculating, setIsCalculating] = useState(false); 
   
   const [absenceToDelete, setAbsenceToDelete] = useState<number | null>(null);
   const [absenceToToggle, setAbsenceToToggle] = useState<number | null>(null);
@@ -43,13 +45,25 @@ export const AttendanceTab: React.FC<Props> = ({ student, onRefresh }) => {
        <div className="flex justify-between items-center mb-2">
          <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300">Registro de Ausencias</h3>
          
-         <button 
-            onClick={() => setIsAdding(true)} 
-            className="text-xs flex items-center gap-1 text-primary hover:bg-primary/10 px-3 py-1.5 rounded-lg transition-colors font-bold"
-         >
-            <span className="material-symbols-outlined text-[18px]">add_circle</span> 
-            Nueva Falta
-         </button>
+         <div className="flex items-center gap-2">
+           {/* Botón Nueva Falta */}
+           <button 
+              onClick={() => setIsAdding(true)} 
+              className="text-xs flex items-center gap-1 text-primary hover:bg-primary/10 px-3 py-1.5 rounded-lg transition-colors font-bold"
+           >
+              <span className="material-symbols-outlined text-[18px]">add_circle</span> 
+              Nueva Falta
+           </button>
+
+           {/* Botón Calcular Promedio */}
+           <button 
+              onClick={() => setIsCalculating(true)} // <--- Abre el modal
+              className="text-xs flex items-center gap-1 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-1.5 rounded-lg transition-colors font-medium border border-slate-200 dark:border-slate-700"
+           >
+              <span className="material-symbols-outlined text-[18px]">calculate</span> 
+              Calcular %
+           </button>
+         </div>
        </div>
 
        <div className="overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700">
@@ -97,11 +111,19 @@ export const AttendanceTab: React.FC<Props> = ({ student, onRefresh }) => {
           </table>
        </div>
 
+       {/* --- MODALES --- */}
        
        <CreateAbsenceModal 
           isOpen={isAdding}
           onClose={() => setIsAdding(false)}
           onSave={handleAdd}
+       />
+       
+       {/* NUEVO MODAL DE CÁLCULO */}
+       <CalculateAttendanceModal 
+          isOpen={isCalculating}
+          onClose={() => setIsCalculating(false)}
+          currentAbsencesCount={student.absences?.length || 0} // Pasamos la cantidad actual
        />
 
        <ConfirmModal 
