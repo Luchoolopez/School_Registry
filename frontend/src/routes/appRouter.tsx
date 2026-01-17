@@ -8,6 +8,7 @@ import { StudentList } from '../pages/StudentList';
 import { Profile } from '../pages/Profile';
 
 import { AdminDashboard } from '../pages/admin/AdminDashboard';
+import RecoverPassword from '../pages/RecoverPassword';
 
 export function AppRouter() {
     return (
@@ -18,6 +19,7 @@ export function AppRouter() {
                 <Route path='/' element={<DashboardSchool />} />
                 <Route path='/students/school/:schoolId' element={<StudentList />} />
                 <Route path='/perfil' element={<Profile />} />
+                <Route path='/recuperar-password' element={<RecoverPassword />} />
             </Route>
 
             <Route element={<AdminRoute />}>

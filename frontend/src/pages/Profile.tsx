@@ -16,7 +16,22 @@ export const Profile: React.FC = () => {
   };
 
   const handlePasswordReset = () => {
-    alert("Funcionalidad de envío de correo en desarrollo.");
+    if (!user) return;
+    const sendReset = async () => {
+      try {
+        if (!user.email) {
+          alert('No hay email asociado a esta cuenta. Contacte al administrador.');
+          return;
+        }
+        const emailService = (await import('../services/email.service')).default;
+        await emailService.forgot(user.email);
+        alert('Se envió un correo para restablecer la contraseña.');
+      } catch (err: any) {
+        console.error(err);
+        alert(err.response?.data?.message || 'Error enviando el correo.');
+      }
+    };
+    sendReset();
   };
 
   if (!user) return null;

@@ -8,8 +8,8 @@
     "build:watch": "tsc --watch",
     "dev": "nodemon src/server.ts",
     "start": "node dist/server.js",
-    "test":"jest",
-    "test:watch":"jest --watchAll"
+    "test": "jest",
+    "test:watch": "jest --watchAll"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +23,7 @@
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.0.2",
     "mysql2": "^3.16.0",
+    "resend": "^6.7.0",
     "sequelize": "^6.37.7",
     "zod": "^4.3.5"
   },

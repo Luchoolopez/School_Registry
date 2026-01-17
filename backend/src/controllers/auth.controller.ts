@@ -1,4 +1,5 @@
 import { AuthService } from "../services/auth.service";
+import emailService from '../services/email.service';
 import { Request, Response } from "express";
 
 export class AuthController {
@@ -43,6 +44,12 @@ export class AuthController {
         try {
             const { username, dni, email, password, role } = req.body;
             const newUser = await this.authService.register({ username, dni, email, password, role });
+            // enviar email de bienvenida (no bloquear el registro si falla)
+            try {
+                await emailService.sendAccountCreated(newUser.email, newUser.username, dni);
+            } catch (err) {
+                console.error('Error enviando email de bienvenida:', err);
+            }
             return res.status(201).json({
                 success: true,
                 message: 'Usuario registrado exitosamente',
