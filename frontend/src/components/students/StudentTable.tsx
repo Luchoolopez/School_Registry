@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Student } from '../../types/student.types';
 import { StudentRow } from './StudentRow';
+import StudentCard from './StudentCard';
 
 interface Props {
   students: Student[];
@@ -28,9 +29,24 @@ export const StudentTable: React.FC<Props> = ({
   }
 
   return (
-    <div className="bg-white dark:bg-[#1a232e] rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
-      <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse">
+    <div>
+      {/* Mobile: show cards */}
+      <div className="sm:hidden space-y-3">
+        {students.map((student) => (
+          <StudentCard
+            key={student.id}
+            student={student}
+            onClick={() => onStudentClick(student)}
+            onEdit={(e) => { e.stopPropagation(); onEditStudent(student); }}
+            onDelete={(e) => { e.stopPropagation(); onDeleteStudent(student); }}
+          />
+        ))}
+      </div>
+
+      {/* Desktop: table */}
+      <div className="hidden sm:block bg-white dark:bg-[#1a232e] rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
           <thead>
             <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 text-xs uppercase text-slate-500 font-semibold tracking-wide">
               <th className="px-4 py-3 w-1/2">Alumno</th>
@@ -50,7 +66,8 @@ export const StudentTable: React.FC<Props> = ({
               />
             ))}
           </tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </div>
   );
