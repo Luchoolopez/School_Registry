@@ -9,7 +9,7 @@ const userRouter = Router();
 userRouter.get('/', authenticate, UserController.list);
 userRouter.get('/:id', authenticate, UserController.get);
 userRouter.put('/:id', authenticate, validateSchema(updateUserSchema), UserController.update);
-userRouter.delete('/:id', authenticate, UserController.deactivate);
+userRouter.delete('/:id', authenticate, UserController.toggleStatus);
 
 export default userRouter;
 export { userRouter as Router };

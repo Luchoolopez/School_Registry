@@ -51,15 +51,17 @@ export class UserController {
     }
   };
 
-  deactivate = async (req: Request, res: Response) => {
+  toggleStatus = async (req: Request, res: Response) => {
     try {
       if (!req.user || req.user.role !== 'admin') {
         return res.status(403).json({ success: false, message: 'Acceso denegado' });
       }
 
       const id = Number(req.params.id);
-      await this.userService.deactivateUser(id);
-      return res.status(200).json({ success: true, message: 'Usuario desactivado' });
+      const updated = await this.userService.toggleUserStatus(id as any);
+      const active = (updated as any).active;
+      const message = active ? 'Usuario activado' : 'Usuario desactivado';
+      return res.status(200).json({ success: true, message, data: updated });
     } catch (error: any) {
       return res.status(400).json({ success: false, message: error.message });
     }

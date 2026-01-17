@@ -12,14 +12,14 @@ export class UserService {
     }
 
     async getById(id: number) {
-        const user = await User.findByPk(id as any);
+        const user = await User.findByPk(id);
         if (!user) throw new Error('Usuario no encontrado');
         const { password, ...rest } = user.get({ plain: true }) as any;
         return rest;
     }
 
     async updateUser(id: number, data: Partial<{ username: string; dni: string; role: 'admin' | 'docente'; password?: string; active?: boolean }>) {
-        const user = await User.findByPk(id as any);
+        const user = await User.findByPk(id);
         if (!user) throw new Error('Usuario no encontrado');
 
         if (data.password) {
@@ -33,11 +33,16 @@ export class UserService {
         return rest;
     }
 
-    async deactivateUser(id: number) {
-        const user = await User.findByPk(id as any);
+    async toggleUserStatus(id: number) {
+        const user = await User.findByPk(id);
         if (!user) throw new Error('Usuario no encontrado');
-        await user.update({ active: false } as any);
-        return true;
+
+        const current = (user.get({ plain: true }) as any).active as boolean;
+        const newStatus = !current;
+        await user.update({ active: newStatus } as any);
+
+        const { password, ...rest } = user.get({ plain: true }) as any;
+        return rest;
     }
 }
 
