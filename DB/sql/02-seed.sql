@@ -1,8 +1,8 @@
 USE docente_db;
 
-INSERT INTO users (username, dni, password, role) 
+INSERT INTO users (username, email, dni, password, role) 
 VALUES 
-('admin', '00000000', '$2b$10$3j4o7yJv0.qcgtdyYUwgmeRmgt.upVth.ut73Wwmrximj.rhbelAK', 'admin');
+('admin', 'admin@local', '00000000', '$2b$10$3j4o7yJv0.qcgtdyYUwgmeRmgt.upVth.ut73Wwmrximj.rhbelAK', 'admin');
 
 
 -- Insertar una Escuela de prueba para el admin (ID usuario 1)

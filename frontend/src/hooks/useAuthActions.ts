@@ -14,7 +14,7 @@ export const useAuthActions = () => {
     return payload;
   }, [ctx]);
 
-  const register = useCallback(async (data: { username: string; dni: string; password: string; role?: string }) => {
+  const register = useCallback(async (data: { username: string; dni: string; email?: string; password: string; role?: string }) => {
     const res = await authService.register(data);
     return res;
   }, []);

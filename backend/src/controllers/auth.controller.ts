@@ -41,8 +41,8 @@ export class AuthController {
 
     register = async (req: Request, res: Response) => {
         try {
-            const { username, dni, password, role } = req.body;
-            const newUser = await this.authService.register({ username, dni, password, role });
+            const { username, dni, email, password, role } = req.body;
+            const newUser = await this.authService.register({ username, dni, email, password, role });
             return res.status(201).json({
                 success: true,
                 message: 'Usuario registrado exitosamente',
@@ -53,6 +53,13 @@ export class AuthController {
                 return res.status(401).json({
                     success: false,
                     message: 'El DNI ya está registrado'
+                });
+            }
+
+            if (error.message === 'El email ya está registrado') {
+                return res.status(401).json({
+                    success: false,
+                    message: 'El email ya está registrado'
                 });
             }
 

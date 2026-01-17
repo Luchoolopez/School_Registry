@@ -44,11 +44,13 @@ export class AuthService {
   }
 
   async register(data: UserCreationAttributes) {
-    const existingDni = await User.findOne({
-      where: { dni: data.dni }
-    });
-
+    const existingDni = await User.findOne({ where: { dni: data.dni } });
     if (existingDni) throw new Error('El DNI ya está registrado');
+
+    if (data.email) {
+      const existingEmail = await User.findOne({ where: { email: data.email } });
+      if (existingEmail) throw new Error('El email ya está registrado');
+    }
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(data.password, salt);

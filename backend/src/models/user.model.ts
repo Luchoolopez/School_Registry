@@ -5,6 +5,7 @@ interface UserAttributes {
     id: number;
     username: string;
     dni:string;
+    email: string;
     password: string;
     role: 'admin' | 'docente';
     active: boolean;
@@ -19,6 +20,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes>
     public id!: number;
     public username!: string;
     public dni!:string;
+    public email!: string;
     public password!: string;
     public role!: 'admin' | 'docente';
     public active!: boolean;
@@ -37,6 +39,12 @@ User.init(
         username: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+            validate: { isEmail: true }
         },
         dni:{
             type:DataTypes.STRING,

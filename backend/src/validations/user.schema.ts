@@ -10,7 +10,8 @@ export const loginSchema = z.object({
 export const registerSchema = z.object({
   body: z.object({
     username: z.string().min(3, "El usuario debe tener al menos 3 caracteres"),
-    dni: z.string().min(7, "El DNI debe ser válido"), 
+    dni: z.string().min(7, "El DNI debe ser válido"),
+    email: z.string().email("Email inválido"),
     password: z.string().min(6, "La contraseña debe tener al menos 6 caracteres"),
     role: z.enum(['admin', 'docente']).optional(),
   }),

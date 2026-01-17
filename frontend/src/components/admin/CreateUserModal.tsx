@@ -10,6 +10,7 @@ interface Props {
 export const CreateUserModal: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => {
   const [username, setUsername] = useState('');
   const [dni, setDni] = useState('');
+  const [email, setEmail] = useState('');
   const [role, setRole] = useState<'docente' | 'admin'>('docente');
   
   const [loading, setLoading] = useState(false);
@@ -21,8 +22,8 @@ export const CreateUserModal: React.FC<Props> = ({ isOpen, onClose, onSuccess })
     e.preventDefault();
     const usernameTrim = username.trim();
     const dniTrim = dni.trim();
-    if (!usernameTrim || !dniTrim) {
-        setError("Todos los campos son obligatorios");
+    if (!usernameTrim || !dniTrim || !email.trim()) {
+      setError("Todos los campos son obligatorios");
         return;
     }
 
@@ -33,6 +34,7 @@ export const CreateUserModal: React.FC<Props> = ({ isOpen, onClose, onSuccess })
       await authService.register({
         username,
         dni,
+        email,
         role,
         password: dni 
       });
@@ -50,6 +52,7 @@ export const CreateUserModal: React.FC<Props> = ({ isOpen, onClose, onSuccess })
   const handleClose = () => {
     setUsername('');
     setDni('');
+    setEmail('');
     setRole('docente');
     setError(null);
     onClose();
@@ -81,6 +84,17 @@ export const CreateUserModal: React.FC<Props> = ({ isOpen, onClose, onSuccess })
               onChange={e => setDni(e.target.value)}
               className="w-full px-3 py-2 mt-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm focus:ring-2 focus:ring-primary/50 outline-none dark:text-white" 
               placeholder="Ej. 12345678"
+            />
+          </div>
+
+          <div>
+            <label className="text-xs font-semibold text-slate-500 uppercase">Email</label>
+            <input 
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              className="w-full px-3 py-2 mt-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm focus:ring-2 focus:ring-primary/50 outline-none dark:text-white" 
+              placeholder="ejemplo@dominio.com"
             />
           </div>
 
