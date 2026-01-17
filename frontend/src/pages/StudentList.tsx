@@ -5,7 +5,7 @@ import CreateStudentModal from '../components/students/CreateStudentModal';
 import EditStudentModal from '../components/students/EditStudentModal';
 import { StudentTable } from '../components/students/StudentTable';
 import studentService from '../services/student.service';
-//import schoolService from '../services/school.service'; // Para sacar el nombre de la escuela si lo necesitas
+import schoolService from '../services/school.service';
 import type { Student } from '../types/student.types';
 import * as XLSX from 'xlsx'; 
 
@@ -20,7 +20,6 @@ export const StudentList: React.FC = () => {
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
 
-  // Cargar datos
   useEffect(() => {
     const fetchData = async () => {
       if (!schoolId) return;
@@ -28,7 +27,14 @@ export const StudentList: React.FC = () => {
         setLoading(true);
         const data = await studentService.getStudentsBySchool(Number(schoolId));
         setStudents(data);
-        setSchoolName("Escuela Ejemplo"); 
+        try {
+          const schools = await schoolService.getSchools();
+          const found = schools.find(s => String(s.id) === String(schoolId));
+          setSchoolName(found ? found.name : `Escuela ${schoolId}`);
+        } catch (err) {
+          console.warn('No se pudo obtener nombre de la escuela', err);
+          setSchoolName(`Escuela ${schoolId}`);
+        }
 
       } catch (error) {
         console.error("Error cargando planilla", error);

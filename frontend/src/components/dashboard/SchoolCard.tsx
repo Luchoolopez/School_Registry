@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { getSchoolColor } from '../../utils/uiHelpers';
 import type { School } from '../../types/school.types';
 import SchoolActions from './SchoolActions';
+import { useEffect, useState } from 'react';
+import studentService from '../../services/student.service';
 
 interface Props {
   school: School;
@@ -14,6 +16,22 @@ interface Props {
 export const SchoolCard: React.FC<Props> = ({ school, onUpdated, onDeleted }) => {
   const navigate = useNavigate();
   const theme = getSchoolColor(school.id);
+  const [studentCount, setStudentCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    const fetchCount = async () => {
+      try {
+        const students = await studentService.getStudentsBySchool(school.id);
+        if (mounted) setStudentCount(students.length);
+      } catch (err) {
+        console.warn('No se pudo obtener cantidad de alumnos para escuela', school.id, err);
+        if (mounted) setStudentCount(null);
+      }
+    };
+    fetchCount();
+    return () => { mounted = false; };
+  }, [school.id]);
 
   const handleViewStudents = () => {
     navigate(`/students/school/${school.id}`);
@@ -47,7 +65,9 @@ export const SchoolCard: React.FC<Props> = ({ school, onUpdated, onDeleted }) =>
       <div className="mt-auto">
         <div className="flex items-center gap-2 mb-3 text-xs text-slate-400 dark:text-slate-500 px-1">
             <span className="material-symbols-outlined text-[16px]">groups</span>
-            <span>Ver Alumnos</span>
+            <span>
+              {studentCount === null ? 'Ver Alumnos' : `${studentCount} ${studentCount === 1 ? 'Alumno' : 'Alumnos'}`}
+            </span>
         </div>
 
         <button 

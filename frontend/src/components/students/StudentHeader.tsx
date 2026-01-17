@@ -15,7 +15,7 @@ export const StudentHeader: React.FC<Props> = ({ schoolName, onSearch, onAdd, on
     <div className="mb-6 space-y-4">
       <div className="flex flex-col gap-1">
         <button 
-          onClick={() => navigate('/escuelas')} 
+          onClick={() => navigate('/')} 
           className="text-xs text-primary font-medium flex items-center gap-1 hover:underline w-fit"
         >
           <span className="material-symbols-outlined text-[14px]">arrow_back</span>

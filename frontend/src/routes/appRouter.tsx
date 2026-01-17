@@ -12,7 +12,7 @@ export function AppRouter() {
             <Route path="/iniciar-sesion" element={<Login />} />
 
             <Route element={<MainLayout />}>
-                <Route path='/escuelas' element={<DashboardSchool />} />
+                <Route path='/' element={<DashboardSchool />} />
                 <Route path='/students/school/:schoolId' element={<StudentList />} />
             </Route>
 
