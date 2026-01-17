@@ -1,7 +1,7 @@
 // src/components/dashboard/SchoolCard.tsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getSchoolColor } from '../utils/uiHelpers';
+import { getSchoolColor } from '../../utils/uiHelpers';
 import type { School } from '../../types/school.types';
 import SchoolActions from './SchoolActions';
 
