@@ -23,7 +23,7 @@ export function Login() {
 
         try {
             await login(username, password);
-            navigate('/escuelas');
+            navigate('/');
         } catch (err: any) {
             const errorMsg = err.response?.data?.message || 'Error al iniciar sesión. Verifique sus credenciales.';
             setError(errorMsg);
