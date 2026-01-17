@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import type { Student } from '../../types/student.types';
 import absenceService from '../../services/absence.service';
 import { ConfirmModal } from '../ConfirmModal';
+import { CreateAbsenceModal } from './CreateAbsenceModal';
 
 interface Props {
   student: Student;
@@ -10,18 +11,15 @@ interface Props {
 
 export const AttendanceTab: React.FC<Props> = ({ student, onRefresh }) => {
   const [isAdding, setIsAdding] = useState(false);
-  const [newDate, setNewDate] = useState('');
   
   const [absenceToDelete, setAbsenceToDelete] = useState<number | null>(null);
   const [absenceToToggle, setAbsenceToToggle] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleAdd = async () => {
-    if (!newDate) return;
-    setLoading(true);
-    await absenceService.createAbsence(student.id, { date: newDate, justified: false });
+  const handleAdd = async (date: string) => {
+    await absenceService.createAbsence(student.id, { date, justified: false });
     await onRefresh();
-    setNewDate(''); setIsAdding(false); setLoading(false);
+    setIsAdding(false);
   };
 
   const handleDelete = async () => {
@@ -44,20 +42,15 @@ export const AttendanceTab: React.FC<Props> = ({ student, onRefresh }) => {
     <div className="space-y-4">
        <div className="flex justify-between items-center mb-2">
          <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300">Registro de Ausencias</h3>
-         {!isAdding && (
-            <button onClick={() => setIsAdding(true)} className="text-xs flex items-center gap-1 text-primary hover:underline font-medium">
-              <span className="material-symbols-outlined text-[16px]">add</span> Nueva Falta
-            </button>
-         )}
+         
+         <button 
+            onClick={() => setIsAdding(true)} 
+            className="text-xs flex items-center gap-1 text-primary hover:bg-primary/10 px-3 py-1.5 rounded-lg transition-colors font-bold"
+         >
+            <span className="material-symbols-outlined text-[18px]">add_circle</span> 
+            Nueva Falta
+         </button>
        </div>
-
-       {isAdding && (
-         <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700 mb-4 flex gap-3">
-            <input type="date" value={newDate} onChange={e => setNewDate(e.target.value)} className="flex-1 px-3 py-2 text-sm rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800" />
-            <button onClick={handleAdd} disabled={loading} className="px-4 py-2 bg-primary text-white text-xs font-bold rounded hover:bg-primary/90">Guardar</button>
-            <button onClick={() => setIsAdding(false)} className="px-3 py-2 bg-white border border-slate-300 text-xs font-bold rounded hover:bg-slate-50 text-slate-600">Cancelar</button>
-         </div>
-       )}
 
        <div className="overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700">
           <table className="w-full text-sm text-left">
@@ -70,27 +63,46 @@ export const AttendanceTab: React.FC<Props> = ({ student, onRefresh }) => {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {student.absences?.map(absence => (
-                <tr key={absence.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 group">
+                <tr key={absence.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 group transition-colors">
                   <td className="px-4 py-3 font-medium text-slate-700 dark:text-slate-200">{absence.date}</td>
                   <td className="px-4 py-3 text-center">
                     <button 
                       onClick={() => setAbsenceToToggle(absence.id)}
-                      className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide cursor-pointer hover:opacity-80 transition-opacity ${absence.justified ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}`}
+                      className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide cursor-pointer hover:opacity-80 transition-opacity ${absence.justified ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'}`}
                       title="Click para cambiar estado"
                     >
                       {absence.justified ? 'Justificada' : 'Injustificada'}
                     </button>
                   </td>
                   <td className="px-4 py-3 text-right">
-                     <button onClick={() => setAbsenceToDelete(absence.id)} className="text-slate-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span className="material-symbols-outlined text-[18px]">delete</span>
-                     </button>
+                     <div className="flex justify-end opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                        <button 
+                            onClick={() => setAbsenceToDelete(absence.id)} 
+                            className="p-2 text-slate-400 active:text-red-500 md:hover:text-red-500 active:bg-slate-100 rounded-full transition-colors"
+                        >
+                            <span className="material-symbols-outlined text-[20px] md:text-[18px]">delete</span>
+                        </button>
+                     </div>
                   </td>
                 </tr>
               ))}
+              {(!student.absences || student.absences.length === 0) && (
+                <tr>
+                    <td colSpan={3} className="px-4 py-8 text-center text-slate-400 text-xs italic">
+                        Asistencia perfecta. No hay faltas registradas.
+                    </td>
+                </tr>
+              )}
             </tbody>
           </table>
        </div>
+
+       
+       <CreateAbsenceModal 
+          isOpen={isAdding}
+          onClose={() => setIsAdding(false)}
+          onSave={handleAdd}
+       />
 
        <ConfirmModal 
           isOpen={!!absenceToDelete}
@@ -102,10 +114,11 @@ export const AttendanceTab: React.FC<Props> = ({ student, onRefresh }) => {
           onConfirm={handleDelete}
           loading={loading}
        />
+       
        <ConfirmModal 
           isOpen={!!absenceToToggle}
           title="Cambiar Estado"
-          message="¿Deseas cambiar el estado (Justificada/Injustificada) de esta falta?"
+          message={`¿Deseas cambiar el estado de esta falta a ${!student.absences?.find(a => a.id === absenceToToggle)?.justified ? 'Justificada' : 'Injustificada'}?`}
           confirmText="Cambiar"
           onClose={() => setAbsenceToToggle(null)}
           onConfirm={handleToggle}
