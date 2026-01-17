@@ -97,7 +97,12 @@ export const Header: React.FC = () => {
                     </div>
                   </div>
 
-                  <button className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-2">
+                  <button 
+                    onClick={() => {
+                      navigate('/perfil');
+                      setIsMenuOpen(false);
+                    }}
+                  className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-2">
                     <span className="material-symbols-outlined text-[18px]">person</span>
                     Mi Perfil
                   </button>

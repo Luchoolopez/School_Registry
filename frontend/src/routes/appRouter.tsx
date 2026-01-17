@@ -5,6 +5,7 @@ import { AdminRoute } from './adminRouter';
 import { DashboardSchool } from '../pages/DashboardSchool';
 import { MainLayout } from '../layout/MainLayout';
 import { StudentList } from '../pages/StudentList';
+import { Profile } from '../pages/Profile';
 
 import { AdminDashboard } from '../pages/admin/AdminDashboard';
 
@@ -16,6 +17,7 @@ export function AppRouter() {
             <Route element={<MainLayout />}>
                 <Route path='/' element={<DashboardSchool />} />
                 <Route path='/students/school/:schoolId' element={<StudentList />} />
+                <Route path='/perfil' element={<Profile />} />
             </Route>
 
             <Route element={<AdminRoute />}>
