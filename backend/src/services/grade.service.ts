@@ -1,6 +1,6 @@
-import { Grade } from "../models/Grade.model";
-import { Student } from "../models/Student.model";
-import { School } from "../models/School.model";
+import { Grade } from "../models/grade.model";
+import { Student } from "../models/student.model";
+import { School } from "../models/school.model";
 import { CreateGradeInput, UpdateGradeInput } from "../validations/grade.schema";
 
 export class GradeService {

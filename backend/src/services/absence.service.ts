@@ -1,6 +1,6 @@
-import { Absence } from "../models/Absence.model";
-import { Student } from "../models/Student.model";
-import { School } from "../models/School.model";
+import { Absence } from "../models/absence.model";
+import { Student } from "../models/student.model";
+import { School } from "../models/school.model";
 import { CreateAbsenceInput } from "../validations/absence.schema";
 
 export class AbsenceService {

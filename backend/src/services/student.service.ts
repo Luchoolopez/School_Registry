@@ -1,7 +1,7 @@
-import { Student } from "../models/Student.model";
-import { School } from "../models/School.model";
-import { Grade } from "../models/Grade.model";
-import { Absence } from "../models/Absence.model";
+import { Student } from "../models/student.model";
+import { School } from "../models/school.model";
+import { Grade } from "../models/grade.model";
+import { Absence } from "../models/absence.model";
 import { CreateStudentInput, UpdateStudentInput } from "../validations/student.schema";
 
 export class StudentService {

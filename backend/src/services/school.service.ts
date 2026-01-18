@@ -1,4 +1,4 @@
-import { School } from "../models/School.model";
+import { School } from "../models/school.model";
 import { CreateSchoolInput, UpdateSchoolInput } from "../validations/school.schema";
 
 export class SchoolService {

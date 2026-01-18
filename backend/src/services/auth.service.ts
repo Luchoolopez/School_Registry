@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { User, UserCreationAttributes } from '../models/User.model';
+import { User, UserCreationAttributes } from '../models/user.model';
 
 export class AuthService {
 

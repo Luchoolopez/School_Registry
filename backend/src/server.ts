@@ -1,6 +1,6 @@
 import config from './config/config';
 import { connectWithRetry, sequelize } from './config/database';
-import { setupAssociations } from './models/Association';
+import { setupAssociations } from './models/association';
 import { makeApp } from './app';
 
 const app = makeApp();

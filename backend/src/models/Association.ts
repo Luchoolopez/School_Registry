@@ -1,8 +1,8 @@
-import { User } from "./User.model";
-import { School } from "./School.model";
-import { Student } from "./Student.model";
-import { Grade } from "./Grade.model";
-import { Absence } from "./Absence.model";
+import { User } from "./user.model";
+import { School } from "./school.model";
+import { Student } from "./student.model";
+import { Grade } from "./grade.model";
+import { Absence } from "./absence.model";
 
 export const setupAssociations = () => {
     // 1. Usuario <-> Escuelas
