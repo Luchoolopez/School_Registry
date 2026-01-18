@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { User } from '../models/User.model';
+import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
 
 const userService = new UserService();

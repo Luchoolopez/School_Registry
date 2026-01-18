@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { User } from '../models/User.model';
+import { User } from '../models/user.model';
 import emailService from '../services/email.service'; 
 
 export const forgotPassword = async (req: Request, res: Response) => {

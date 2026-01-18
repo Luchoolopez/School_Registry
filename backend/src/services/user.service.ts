@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { User } from '../models/User.model';
+import { User } from '../models/user.model';
 
 export class UserService {
     async getAll(includeInactive = false) {
