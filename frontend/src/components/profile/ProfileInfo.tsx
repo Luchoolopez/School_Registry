@@ -10,7 +10,7 @@ export const ProfileInfo: React.FC<Props> = ({ user }) => {
     <div className="mt-8">
       <div className="flex items-center justify-between px-1 mb-4">
         <h3 className="text-slate-900 dark:text-white text-lg font-bold tracking-tight">Información Personal</h3>
-        <span className="material-symbols-outlined text-slate-400">info</span>
+        <span translate="no" className="material-symbols-outlined notranslate text-slate-400">info</span>
       </div>
 
       <div className="flex flex-col gap-4">
@@ -22,7 +22,7 @@ export const ProfileInfo: React.FC<Props> = ({ user }) => {
               readOnly 
               value={user.dni}
             />
-            <span className="material-symbols-outlined text-slate-400 text-[20px]">badge</span>
+            <span translate="no" className="material-symbols-outlined notranslate text-slate-400 text-[20px]">badge</span>
           </div>
         </div>
 
@@ -34,7 +34,7 @@ export const ProfileInfo: React.FC<Props> = ({ user }) => {
               readOnly 
               value={user.username}
             />
-            <span className="material-symbols-outlined text-slate-400 text-[20px]">person</span>
+            <span translate="no" className="material-symbols-outlined notranslate text-slate-400 text-[20px]">person</span>
           </div>
         </div>
       </div>

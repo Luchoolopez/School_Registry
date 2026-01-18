@@ -35,7 +35,7 @@ export const Toggle: React.FC<ToggleProps> = ({
     if (!isThemeToggle) return null;
 
     return (
-      <span className={`material-symbols-outlined select-none text-[16px] leading-none transition-all duration-300 ${
+      <span translate="no" className={`material-symbols-outlined notranslate select-none text-[16px] leading-none transition-all duration-300 ${
         checked ? 'text-indigo-500 scale-100' : 'text-amber-500 scale-100'
       }`}>
         {checked ? 'dark_mode' : 'light_mode'}

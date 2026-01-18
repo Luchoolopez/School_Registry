@@ -67,7 +67,7 @@ export const Profile: React.FC = () => {
             onClick={handleLogout}
             className="flex w-full items-center justify-center gap-2 h-14 rounded-xl text-red-500 font-bold bg-red-500/5 hover:bg-red-500/10 transition-colors border border-red-500/10"
           >
-            <span className="material-symbols-outlined">logout</span>
+            <span translate="no" className="material-symbols-outlined notranslate">logout</span>
             Cerrar Sesión
           </button>
           {/*Aca tendria que poner mis datos personales / portafolio */}

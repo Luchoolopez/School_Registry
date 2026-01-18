@@ -40,13 +40,13 @@ export const EditStudentModal: React.FC<Props> = ({ isOpen, student, onClose, on
         <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30">
           <div>
             <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <span className="material-symbols-outlined text-primary">person</span>
+              <span translate="no" className="material-symbols-outlined notranslate text-primary">person</span>
               {student.last_name}, {student.first_name}
             </h2>
             <p className="text-xs text-slate-500">ID: {student.id}</p>
           </div>
           <button onClick={onClose} className="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full transition-colors text-slate-500">
-            <span className="material-symbols-outlined text-[20px]">close</span>
+            <span translate="no" className="material-symbols-outlined notranslate text-[20px]">close</span>
           </button>
         </div>
 

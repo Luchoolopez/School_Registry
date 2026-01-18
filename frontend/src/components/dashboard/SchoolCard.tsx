@@ -44,7 +44,7 @@ export const SchoolCard: React.FC<Props> = ({ school, onUpdated, onDeleted }) =>
         
         <div className="flex gap-3 min-w-0 flex-1">
           <div className={`w-12 h-12 shrink-0 rounded-lg flex items-center justify-center ${theme.bg} ${theme.text}`}>
-            <span className="material-symbols-outlined text-[24px]">{theme.icon}</span>
+            <span translate="no" className="material-symbols-outlined notranslate text-[24px]">{theme.icon}</span>
           </div>
 
           <div className="flex flex-col"> 
@@ -64,7 +64,7 @@ export const SchoolCard: React.FC<Props> = ({ school, onUpdated, onDeleted }) =>
 
       <div className="mt-auto">
         <div className="flex items-center gap-2 mb-3 text-xs text-slate-400 dark:text-slate-500 px-1">
-            <span className="material-symbols-outlined text-[16px]">groups</span>
+            <span translate="no" className="material-symbols-outlined notranslate text-[16px]">groups</span>
             <span>
               {studentCount === null ? 'Ver Alumnos' : `${studentCount} ${studentCount === 1 ? 'Alumno' : 'Alumnos'}`}
             </span>
@@ -75,7 +75,7 @@ export const SchoolCard: React.FC<Props> = ({ school, onUpdated, onDeleted }) =>
             className="w-full bg-primary hover:bg-primary/90 active:scale-[0.98] transition-all text-white font-medium py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 text-sm shadow-sm shadow-primary/20"
         >
             <span>Ver Planilla</span>
-            <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+            <span translate="no" className="material-symbols-outlined notranslate text-[16px]">arrow_forward</span>
         </button>
       </div>
     </div>

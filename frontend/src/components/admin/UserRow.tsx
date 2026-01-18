@@ -38,7 +38,7 @@ export const UserRow: React.FC<Props> = ({ user, onToggleStatus, onDelete }) => 
             ? 'bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-900/20 dark:text-purple-300 dark:border-purple-800' 
             : 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:text-blue-300 dark:border-blue-800'
         }`}>
-           {user.role === 'admin' && <span className="material-symbols-outlined text-[14px]">security</span>}
+           {user.role === 'admin' && <span translate="no" className="material-symbols-outlined notranslate text-[14px]">security</span>}
            {user.role}
         </span>
       </td>
@@ -67,7 +67,7 @@ export const UserRow: React.FC<Props> = ({ user, onToggleStatus, onDelete }) => 
              className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full transition-colors"
              title="Eliminar usuario permanentemente"
            >
-             <span className="material-symbols-outlined text-[20px]">delete</span>
+             <span translate="no" className="material-symbols-outlined notranslate text-[20px]">delete</span>
            </button>
          </div>
       </td>

@@ -57,11 +57,11 @@ export const CalculateAttendanceModal: React.FC<Props> = ({ isOpen, onClose, cur
         
         <div className="flex justify-between items-start mb-4">
             <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <span className="material-symbols-outlined text-primary">calculate</span>
+                <span translate="no" className="material-symbols-outlined notranslate text-primary">calculate</span>
                 Calculadora
             </h3>
             <button onClick={onClose} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
-                <span className="material-symbols-outlined">close</span>
+                <span translate="no" className="material-symbols-outlined notranslate">close</span>
             </button>
         </div>
         
@@ -96,7 +96,7 @@ export const CalculateAttendanceModal: React.FC<Props> = ({ isOpen, onClose, cur
 
           {error && (
               <div className="p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-xs rounded-lg flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[16px]">error</span>
+                  <span translate="no" className="material-symbols-outlined notranslate text-[16px]">error</span>
                   {error}
               </div>
           )}

@@ -18,7 +18,7 @@ export const StudentHeader: React.FC<Props> = ({ schoolName, onSearch, onAdd, on
           onClick={() => navigate('/')} 
           className="text-xs text-primary font-medium flex items-center gap-1 hover:underline w-fit"
         >
-          <span className="material-symbols-outlined text-[14px]">arrow_back</span>
+          <span translate="no" className="material-symbols-outlined notranslate text-[14px]">arrow_back</span>
           Volver a Escuelas
         </button>
         <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
@@ -30,7 +30,7 @@ export const StudentHeader: React.FC<Props> = ({ schoolName, onSearch, onAdd, on
       <div className="flex flex-col sm:flex-row justify-between gap-4">
         <div className="relative w-full sm:w-96">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <span className="material-symbols-outlined text-slate-400">search</span>
+            <span translate="no" className="material-symbols-outlined notranslate text-slate-400">search</span>
           </div>
           <input 
             type="text"
@@ -45,7 +45,7 @@ export const StudentHeader: React.FC<Props> = ({ schoolName, onSearch, onAdd, on
             onClick={onExport}
             className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-[#1a232e] border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-sm"
           >
-            <span className="material-symbols-outlined text-[20px] text-green-600">table_view</span>
+            <span translate="no" className="material-symbols-outlined notranslate text-[20px] text-green-600">table_view</span>
             <span className="hidden sm:inline">Excel</span>
           </button>
           
@@ -53,7 +53,7 @@ export const StudentHeader: React.FC<Props> = ({ schoolName, onSearch, onAdd, on
             onClick={onAdd}
             className="flex items-center gap-2 px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition-colors shadow-sm shadow-primary/20"
           >
-            <span className="material-symbols-outlined text-[20px]">person_add</span>
+            <span translate="no" className="material-symbols-outlined notranslate text-[20px]">person_add</span>
             <span>Agregar Alumno</span>
           </button>
         </div>

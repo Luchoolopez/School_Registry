@@ -22,7 +22,7 @@ export const StudentTable: React.FC<Props> = ({
   if (students.length === 0) {
     return (
       <div className="p-12 text-center bg-white dark:bg-[#1a232e] rounded-xl border border-dashed border-slate-300 dark:border-slate-700">
-        <span className="material-symbols-outlined text-4xl text-slate-300 mb-2">school</span>
+        <span translate="no" className="material-symbols-outlined notranslate text-4xl text-slate-300 mb-2">school</span>
         <p className="text-slate-500">No hay alumnos registrados en esta escuela.</p>
       </div>
     );

@@ -48,7 +48,7 @@ export const GradesTab: React.FC<Props> = ({ student, onRefresh }) => {
             onClick={() => setIsAdding(true)} 
             className="text-xs flex items-center gap-1 text-primary hover:bg-primary/10 px-3 py-1.5 rounded-lg transition-colors font-bold"
         >
-            <span className="material-symbols-outlined text-[18px]">add_circle</span> 
+            <span translate="no" className="material-symbols-outlined notranslate text-[18px]">add_circle</span> 
             Nueva Nota
         </button>
       </div>
@@ -76,10 +76,10 @@ export const GradesTab: React.FC<Props> = ({ student, onRefresh }) => {
                 <td className="px-4 py-3 text-right">
                    <div className="flex justify-end gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                      <button onClick={() => setGradeToEdit(grade)} className="p-2 text-slate-400 active:text-primary md:hover:text-primary active:bg-slate-100 rounded-full transition-colors">
-                        <span className="material-symbols-outlined text-[20px] md:text-[18px]">edit</span>
+                        <span translate="no" className="material-symbols-outlined notranslate text-[20px] md:text-[18px]">edit</span>
                      </button>
                      <button onClick={() => setGradeToDelete(grade.id)} className="p-2 text-slate-400 active:text-red-500 md:hover:text-red-500 active:bg-slate-100 rounded-full transition-colors">
-                        <span className="material-symbols-outlined text-[20px] md:text-[18px]">delete</span>
+                        <span translate="no" className="material-symbols-outlined notranslate text-[20px] md:text-[18px]">delete</span>
                      </button>
                    </div>
                 </td>

@@ -32,10 +32,10 @@ export const StudentCard: React.FC<Props> = ({ student, onClick, onEdit, onDelet
           <div className={`text-sm font-medium ${absences > 10 ? 'text-red-500' : 'text-slate-600 dark:text-slate-300'}`}>{absences}</div>
           <div className="flex items-center gap-1">
             <button onClick={(e) => { e.stopPropagation(); onEdit(e); }} className="p-1.5 text-slate-400 hover:text-primary rounded-full">
-              <span className="material-symbols-outlined text-[18px]">edit</span>
+              <span translate="no" className="material-symbols-outlined notranslate text-[18px]">edit</span>
             </button>
             <button onClick={(e) => { e.stopPropagation(); onDelete(e); }} className="p-1.5 text-slate-400 hover:text-red-500 rounded-full">
-              <span className="material-symbols-outlined text-[18px]">delete</span>
+              <span translate="no" className="material-symbols-outlined notranslate text-[18px]">delete</span>
             </button>
           </div>
         </div>

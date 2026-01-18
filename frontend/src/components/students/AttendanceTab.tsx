@@ -50,7 +50,7 @@ export const AttendanceTab: React.FC<Props> = ({ student, onRefresh }) => {
               onClick={() => setIsAdding(true)} 
               className="text-xs flex items-center gap-1 text-primary hover:bg-primary/10 px-3 py-1.5 rounded-lg transition-colors font-bold"
            >
-              <span className="material-symbols-outlined text-[18px]">add_circle</span> 
+              <span translate="no" className="material-symbols-outlined notranslate text-[18px]">add_circle</span> 
               Nueva Falta
            </button>
 
@@ -58,7 +58,7 @@ export const AttendanceTab: React.FC<Props> = ({ student, onRefresh }) => {
               onClick={() => setIsCalculating(true)} 
               className="text-xs flex items-center gap-1 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-1.5 rounded-lg transition-colors font-medium border border-slate-200 dark:border-slate-700"
            >
-              <span className="material-symbols-outlined text-[18px]">calculate</span> 
+              <span translate="no" className="material-symbols-outlined notranslate text-[18px]">calculate</span> 
               Calcular %
            </button>
          </div>
@@ -92,7 +92,7 @@ export const AttendanceTab: React.FC<Props> = ({ student, onRefresh }) => {
                             onClick={() => setAbsenceToDelete(absence.id)} 
                             className="p-2 text-slate-400 active:text-red-500 md:hover:text-red-500 active:bg-slate-100 rounded-full transition-colors"
                         >
-                            <span className="material-symbols-outlined text-[20px] md:text-[18px]">delete</span>
+                            <span translate="no" className="material-symbols-outlined notranslate text-[20px] md:text-[18px]">delete</span>
                         </button>
                      </div>
                   </td>

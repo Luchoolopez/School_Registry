@@ -20,7 +20,7 @@ export const ProfileHeader: React.FC<Props> = ({ user }) => {
         onClick={() => navigate('/')}
         className="text-xs text-primary font-medium flex items-center gap-1 hover:underline w-fit"
       >
-        <span className="material-symbols-outlined text-[14px]">arrow_back</span>
+        <span translate="no" className="material-symbols-outlined notranslate text-[14px]">arrow_back</span>
         Volver al menu principal
       </button>
       <div className="relative mt-4 bg-white dark:bg-[#1e293b] rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
@@ -42,12 +42,12 @@ export const ProfileHeader: React.FC<Props> = ({ user }) => {
 
           <div className="flex gap-2 mt-4">
             <div className="flex h-8 shrink-0 items-center justify-center gap-x-1.5 rounded-full bg-primary/10 dark:bg-blue-500/20 px-4 border border-primary/20 dark:border-blue-500/30">
-              <span className="material-symbols-outlined text-primary dark:text-blue-400 text-[18px]">school</span>
+              <span translate="no" className="material-symbols-outlined notranslate text-primary dark:text-blue-400 text-[18px]">school</span>
               <p className="text-primary dark:text-blue-400 text-xs font-bold uppercase tracking-wider">{user.role}</p>
             </div>
 
             <div className={`flex h-8 shrink-0 items-center justify-center gap-x-1.5 rounded-full px-4 border ${user.active ? 'bg-green-100 dark:bg-green-500/10 border-green-500/20' : 'bg-red-100 dark:bg-red-500/10 border-red-500/20'}`}>
-              <span className={`material-symbols-outlined text-[18px] ${user.active ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
+              <span translate="no" className={`material-symbols-outlined notranslate text-[18px] ${user.active ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
                 {user.active ? 'check_circle' : 'block'}
               </span>
               <p className={`text-xs font-bold uppercase tracking-wider ${user.active ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
