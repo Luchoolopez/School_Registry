@@ -4,6 +4,7 @@ import { StudentHeader } from '../components/students/StudentHeader';
 import CreateStudentModal from '../components/students/CreateStudentModal';
 import EditStudentModal from '../components/students/EditStudentModal';
 import { StudentTable } from '../components/students/StudentTable';
+import { ConfirmModal } from '../components/ConfirmModal';
 import studentService from '../services/student.service';
 import schoolService from '../services/school.service';
 import type { Student } from '../types/student.types';
@@ -19,6 +20,9 @@ export const StudentList: React.FC = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deletingStudent, setDeletingStudent] = useState<Student | null>(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,7 +59,30 @@ export const StudentList: React.FC = () => {
     setSelectedStudent(s);
     setShowEditModal(true);
   };
-  const handleDelete = (s: Student) => console.log("Borrar", s);
+  const handleDelete = (s: Student) => {
+    setDeletingStudent(s);
+    setShowDeleteModal(true);
+  };
+
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+    setDeletingStudent(null);
+    setDeleteLoading(false);
+  };
+
+  const confirmDelete = async () => {
+    if (!deletingStudent) return;
+    setDeleteLoading(true);
+    try {
+      await studentService.deleteStudent(deletingStudent.id);
+      setStudents(prev => prev.filter(p => p.id !== deletingStudent.id));
+      closeDeleteModal();
+    } catch (err) {
+      console.error('Error eliminando alumno', err);
+      alert('No se pudo eliminar el alumno.');
+      setDeleteLoading(false);
+    }
+  };
   const handleClick = (s: Student) => console.log("Ver detalle completo (modal notas)", s);
 
   const handleCreated = (newStudent: Student) => {
@@ -112,6 +139,16 @@ export const StudentList: React.FC = () => {
         student={selectedStudent}
         onClose={() => { setShowEditModal(false); setSelectedStudent(null); }}
         onUpdated={(s) => { handleUpdated(s); }}
+      />
+      <ConfirmModal
+        isOpen={showDeleteModal}
+        title="Eliminar alumno"
+        message={deletingStudent ? `¿Estás seguro de eliminar a ${deletingStudent.last_name}, ${deletingStudent.first_name}? Esta acción no se puede deshacer.` : ''}
+        onClose={closeDeleteModal}
+        onConfirm={confirmDelete}
+        loading={deleteLoading}
+        confirmText="Eliminar"
+        isDanger
       />
     </div>
   );
