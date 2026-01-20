@@ -39,7 +39,7 @@ export function Login() {
             <div className="flex items-center bg-white dark:bg-slate-900 p-4 border-b border-gray-200 dark:border-gray-800 justify-between shrink-0">
                 <div className="flex items-center gap-3">
                     <div className="text-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                        <span className="material-symbols-outlined select-none">school</span>
+                        <span translate="no" className="material-symbols-outlined notranslate select-none">school</span>
                     </div>
                     <h2 className="text-[#0d131b] dark:text-white text-base font-bold leading-tight tracking-[-0.015em]">
                         MisColegios
@@ -106,7 +106,7 @@ export function Login() {
                                     onClick={() => setShowPassword(!showPassword)}
                                     className="absolute right-3 text-[#4c6c9a] dark:text-gray-500 hover:text-primary transition-colors cursor-pointer flex items-center justify-center p-1"
                                 >
-                                    <span className="material-symbols-outlined text-xl select-none">
+                                    <span translate="no" className="material-symbols-outlined notranslate text-xl select-none">
                                         {showPassword ? 'visibility_off' : 'visibility'}
                                     </span>
                                 </button>
@@ -165,7 +165,7 @@ export function Login() {
                     <div className="bg-white dark:bg-slate-900 rounded-xl shadow-xl w-full max-w-md p-6 border border-gray-100 dark:border-gray-800 transform transition-all scale-100 animate-in zoom-in-95 duration-200">
                         <div className="text-center">
                             <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30 mb-4">
-                                <span className="material-symbols-outlined text-primary text-2xl">info</span>
+                                <span translate="no" className="material-symbols-outlined notranslate text-primary text-2xl">info</span>
                             </div>
                             <h3 className="text-lg font-bold text-gray-900 dark:text-white">Solicitar Acceso</h3>
                             <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
@@ -174,11 +174,11 @@ export function Login() {
 
                             <div className="mt-4 p-4 bg-gray-50 dark:bg-slate-800 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-100 dark:border-gray-700">
                                 <div className="flex items-center justify-center gap-2 mb-1">
-                                    <span className="material-symbols-outlined text-sm">mail</span>
+                                    <span translate="no" className="material-symbols-outlined notranslate text-sm">mail</span>
                                     luchoolopez2810@gmail.com
                                 </div>
                                 <div className="flex items-center justify-center gap-2">
-                                    <span className="material-symbols-outlined text-sm">call</span>
+                                    <span translate="no" className="material-symbols-outlined notranslate text-sm">call</span>
                                     +54 291-406-6356
                                 </div>
                             </div>

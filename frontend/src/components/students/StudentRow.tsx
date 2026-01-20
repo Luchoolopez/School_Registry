@@ -56,14 +56,14 @@ export const StudentRow: React.FC<Props> = ({ student, onClick, onEdit, onDelete
             className="p-1.5 text-slate-400 hover:text-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-full"
             title="Editar nombre"
           >
-            <span className="material-symbols-outlined text-[18px]">edit</span>
+            <span translate="no" className="material-symbols-outlined notranslate text-[18px]">edit</span>
           </button>
           <button 
             onClick={onDelete}
             className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full"
             title="Eliminar alumno"
           >
-            <span className="material-symbols-outlined text-[18px]">delete</span>
+            <span translate="no" className="material-symbols-outlined notranslate text-[18px]">delete</span>
           </button>
         </div>
       </td>

@@ -40,7 +40,7 @@ export const Header: React.FC = () => {
           
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
             <div className="bg-primary/10 text-primary p-2 rounded-lg">
-              <span className="material-symbols-outlined text-2xl leading-none">school</span>
+              <span translate="no" className="material-symbols-outlined notranslate text-2xl leading-none">school</span>
             </div>
             <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
               MisColegios
@@ -103,7 +103,7 @@ export const Header: React.FC = () => {
                       setIsMenuOpen(false);
                     }}
                   className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-2">
-                    <span className="material-symbols-outlined text-[18px]">person</span>
+                    <span translate="no" className="material-symbols-outlined notranslate text-[18px]">person</span>
                     Mi Perfil
                   </button>
 
@@ -115,7 +115,7 @@ export const Header: React.FC = () => {
                         }}
                         className="w-full text-left px-4 py-2 text-sm text-primary dark:text-blue-400 font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-2"
                     >
-                        <span className="material-symbols-outlined text-[18px]">admin_panel_settings</span>
+                        <span translate="no" className="material-symbols-outlined notranslate text-[18px]">admin_panel_settings</span>
                         Panel de Admin
                     </button>
                   )}
@@ -127,7 +127,7 @@ export const Header: React.FC = () => {
                     onClick={handleLogout}
                     className="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors flex items-center gap-2"
                   >
-                    <span className="material-symbols-outlined text-[18px]">logout</span>
+                    <span translate="no" className="material-symbols-outlined notranslate text-[18px]">logout</span>
                     Cerrar Sesión
                   </button>
                 </div>

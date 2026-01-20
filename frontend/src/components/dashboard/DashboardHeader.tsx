@@ -62,7 +62,7 @@ export const DashboardHeader: React.FC<Props> = ({
           className="inline-flex items-center gap-2 px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1a232e] text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-sm font-medium shadow-sm"
           title={sortByName ? "Orden Ascendente" : "Orden Descendente"}
         >
-          <span className="material-symbols-outlined text-[20px]">sort_by_alpha</span>
+          <span translate="no" className="material-symbols-outlined notranslate text-[20px]">sort_by_alpha</span>
           <span>{sortByName ? 'A-Z' : 'Z-A'}</span>
         </button>
 
@@ -76,12 +76,13 @@ export const DashboardHeader: React.FC<Props> = ({
             {yearFilter ? (
                <span 
                  onClick={handleClearYear}
-                 className="material-symbols-outlined text-[16px] text-slate-400 hover:text-red-500 transition-colors"
+                 className="material-symbols-outlined notranslate text-[16px] text-slate-400 hover:text-red-500 transition-colors"
+                 translate="no"
                >
                  close
                </span>
             ) : (
-               <span className={`material-symbols-outlined text-[20px] text-slate-400 transition-transform duration-200 ${isYearMenuOpen ? 'rotate-180' : ''}`}>
+               <span translate="no" className={`material-symbols-outlined notranslate text-[20px] text-slate-400 transition-transform duration-200 ${isYearMenuOpen ? 'rotate-180' : ''}`}>
                  expand_more
                </span>
             )}
@@ -116,7 +117,7 @@ export const DashboardHeader: React.FC<Props> = ({
             onClick={onCreate}
             className="inline-flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg shadow-sm hover:bg-primary/90 active:scale-[0.98] transition-all text-sm font-bold shadow-primary/20 ml-2"
           >
-            <span className="material-symbols-outlined text-[20px]">add</span>
+            <span translate="no" className="material-symbols-outlined notranslate text-[20px]">add</span>
             <span className="hidden sm:inline">Crear Escuela</span>
             <span className="sm:hidden">Crear</span>
           </button>

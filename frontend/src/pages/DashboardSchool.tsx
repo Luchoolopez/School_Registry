@@ -76,7 +76,7 @@ export const DashboardSchool: React.FC = () => {
             </div>
           ) : (
             <div className="text-center py-10 text-gray-400">
-              <span className="material-symbols-outlined text-4xl mb-2">school</span>
+              <span translate="no" className="material-symbols-outlined notranslate text-4xl mb-2">school</span>
               <p>No se encontraron escuelas.</p>
             </div>
           )}

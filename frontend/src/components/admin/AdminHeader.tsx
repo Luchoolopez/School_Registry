@@ -17,7 +17,7 @@ export const AdminHeader: React.FC<Props> = ({ onCreate, onSearch }) => {
           className="mt-1 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
           title="Volver al Dashboard"
         >
-          <span className="material-symbols-outlined text-xl">arrow_back</span>
+          <span translate="no" className="material-symbols-outlined notranslate text-xl">arrow_back</span>
         </button>
         
         <div className="flex-1">
@@ -33,7 +33,7 @@ export const AdminHeader: React.FC<Props> = ({ onCreate, onSearch }) => {
       <div className="flex flex-col sm:flex-row justify-between gap-4">
         <div className="relative w-full sm:max-w-md">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <span className="material-symbols-outlined text-slate-400">search</span>
+            <span translate="no" className="material-symbols-outlined notranslate text-slate-400">search</span>
           </div>
           <input 
             type="text"
@@ -47,7 +47,7 @@ export const AdminHeader: React.FC<Props> = ({ onCreate, onSearch }) => {
           onClick={onCreate}
           className="flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white rounded-lg font-bold hover:bg-primary/90 shadow-sm shadow-primary/20 transition-all active:scale-[0.98] whitespace-nowrap"
         >
-          <span className="material-symbols-outlined text-[20px]">person_add</span>
+          <span translate="no" className="material-symbols-outlined notranslate text-[20px]">person_add</span>
           <span>Nuevo Usuario</span>
         </button>
       </div>

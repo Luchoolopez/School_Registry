@@ -24,7 +24,7 @@ export const UserTable: React.FC<Props> = ({ users, loading, onToggleStatus, onD
     return (
       <div className="w-full bg-white dark:bg-[#1a232e] rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-12 flex flex-col items-center justify-center text-center">
         <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-4">
-            <span className="material-symbols-outlined text-3xl text-slate-400">group_off</span>
+            <span translate="no" className="material-symbols-outlined notranslate text-3xl text-slate-400">group_off</span>
         </div>
         <h3 className="text-slate-900 dark:text-white font-bold mb-1">No hay usuarios</h3>
         <p className="text-slate-500 text-sm">Comienza registrando un nuevo docente o administrador.</p>
