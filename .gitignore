@@ -9,6 +9,8 @@ backend/.env
 .env.test.local
 .env.production.local
 
+generarHash.js
+
 # Logs
 logs
 *.log
